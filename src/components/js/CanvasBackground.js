@@ -32,49 +32,17 @@ import redisIcon from '../../assets/icons/redis.png';
 import kuberIcon from '../../assets/icons/kuber.png';
 import confluenceIcon from '../../assets/icons/confluence.png';
 import whaIcon from '../../assets/icons/wha.png';
-import jenkinsIcon from '../../assets/icons/jenkins.png';
 import telegramIcon from '../../assets/icons/telegram.png';
 import wordpressIcon from '../../assets/icons/wordpress.png';
 
 const icons = [
-  emailIcon,
-  elasticsearchIcon,
-  wordpressIcon,
-  jenkinsIcon,
-  confluenceIcon,
-  kuberIcon,
-  telegramIcon,
-  redisIcon,
-  awsIcon,
-  whaIcon,
-  gptIcon,
-  postmanIcon,
-  swaggerIcon,
-  mysqlIcon,
-  discordIcon,
-  twitterIcon,
-  sapIcon,
-  slackIcon,
-  teamsIcon,
-  teamsSalesforce,
-  teamsPosIcon,
-  rabbitIcon,
-  notionIcon,
-  dockerIcon,
-  gitIcon,
-  dropboxIcon,
-  webhookIcon,
-  kafkaIcon,
-  mongoIcon,
-  postgressIcon,
-  apiIcon,
-  grafanaIcon,
-  shopifyIcon,
-  stripeIcon,
-  paypalIcon,
-  azureIcon
+  emailIcon, elasticsearchIcon, wordpressIcon, confluenceIcon,
+  kuberIcon, telegramIcon, redisIcon, awsIcon, whaIcon, gptIcon,
+  postmanIcon, swaggerIcon, mysqlIcon, discordIcon, twitterIcon, sapIcon,
+  slackIcon, teamsIcon, teamsSalesforce, teamsPosIcon, rabbitIcon, notionIcon,
+  dockerIcon, gitIcon, dropboxIcon, webhookIcon, kafkaIcon, mongoIcon,
+  postgressIcon, apiIcon, grafanaIcon, shopifyIcon, stripeIcon, paypalIcon, azureIcon
 ];
-
 
 const CanvasBackground = () => {
   const canvasRef = useRef(null);
@@ -94,7 +62,6 @@ const CanvasBackground = () => {
 
     const loadImages = () => {
       images.current = [];
-    
       const promises = icons.map((icon, index) => {
         return new Promise((resolve) => {
           const img = new Image();
@@ -122,7 +89,6 @@ const CanvasBackground = () => {
         if (images.current[index]) {
           let dx = (Math.random() - 0.5);
           let dy = (Math.random() - 0.5);
-
           const normalized = normalizeSpeed(dx, dy, speed);
 
           const dot = {
@@ -131,7 +97,7 @@ const CanvasBackground = () => {
             radius: 40,
             dx: normalized.dx,
             dy: normalized.dy,
-            image: images.current[index],
+            image: images.current[index]
           };
           dots.push(dot);
         }
@@ -168,18 +134,21 @@ const CanvasBackground = () => {
 
     const drawDots = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawConnections(ctx, dots); // Draw connections first
+      drawConnections(ctx, dots);
 
       dots.forEach((dot) => {
         ctx.drawImage(dot.image, dot.x - dot.radius / 2, dot.y - dot.radius / 2, dot.radius, dot.radius);
-
         dot.x += dot.dx;
         dot.y += dot.dy;
 
-        // Bounce off edges
-        if (dot.x < 0 || dot.x > canvas.width) dot.dx = -dot.dx;
-        if (dot.y < 0 || dot.y > canvas.height) dot.dy = -dot.dy;
+        if (dot.x < 0 || dot.x > canvas.width) {
+          dot.dx = -dot.dx;
+          dot.dy += (Math.random() - 0.5) * 0.5; // Add random angle shift
+        }
+        if (dot.y < 0 || dot.y > canvas.height) {
+          dot.dy = -dot.dy;
+          dot.dx += (Math.random() - 0.5) * 0.5; // Add random angle shift
+        }
       });
     };
 
