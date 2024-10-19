@@ -23,26 +23,46 @@ function Home() {
       setTimeout(() => {
         setCurrentSkillIndex((prevIndex) => (prevIndex + 1) % skills.length);
         setIsTransitioning(false);
-      }, 500);
-    }, 5000);
+      }, 300);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [skills.length]);
 
   return (
     <div className="home-container">
-      <CanvasBackground /> {}
+      <CanvasBackground />
       <div className="content">
-        <img src={profileImage} alt="Profile" className="profile-image" />
-        <h1>Hello, I'm Alvaro Morales</h1>
-        <p>Business Process Automation & Systems Integration Engineer<br/><br/><br/><br/></p>
-        <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
-          {skills[currentSkillIndex]}
-        </h2>
+        {}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column', 
+          alignItems: 'center', 
+        }}>
+          {}
+          <img src={profileImage} alt="Profile" className="profile-image" />
+
+          {}
+          <div style={{
+            position: 'relative',
+            padding: '20px',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+            borderRadius: '8px',
+            marginTop: '5px',
+            zIndex: 1
+          }}>
+            <h1>Hello, I'm Alvaro Morales</h1>
+            <p>Business Process Automation & Systems Integration Engineer<br/><br/></p>
+            
+            {}
+            <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+              {skills[currentSkillIndex]}
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
 
 export default Home;

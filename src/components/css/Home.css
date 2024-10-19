@@ -1,7 +1,7 @@
 .home-container {
     position: relative;
     height: 100vh;
-    background: #56564E;
+    background: #F5F5DC;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,4 +22,10 @@
     object-fit: cover;
     margin-bottom: 20px;
     border: 5px solid #E4A34E;
+}
+
+
+
+.rotating-skills {
+    color: #E4A34E;
 }

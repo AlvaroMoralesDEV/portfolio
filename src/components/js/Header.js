@@ -5,7 +5,6 @@ function Header() {
   return (
     <header>
       <div className="header-container">
-        <img src="icon.png" alt="Logo" className="logo-icon" /> {}
         <h1 className="logo-name">Alvaro Morales</h1>
         <nav>
           <ul className="nav-menu">
