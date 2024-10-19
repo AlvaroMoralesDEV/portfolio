@@ -22,9 +22,8 @@ body {
 
 main {
   flex: 1;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  color: #56564E;
+  background-color: #F5F5DC;
+  color: #F5F5DC;
   text-align: center;
 }
 
