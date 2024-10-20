@@ -15,7 +15,7 @@ function Footer() {
             <img src={linkedinIcon} alt="LinkedIn" className="social-icon" /> {}
           </a>
           <a href="https://github.com/AlvaroMoralesDEV" target="_blank" rel="noopener noreferrer">
-            <img src={githubIcon} alt="Email" className="social-icon" /> {}
+            <img src={githubIcon} alt="Github" className="social-icon" /> {}
           </a>
           <a href="mailto:alvaromfc24@gmail.com">
             <img src={gmailIcon} alt="Email" className="social-icon" /> {}
