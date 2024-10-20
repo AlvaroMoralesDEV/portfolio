@@ -6,6 +6,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-left: 4px solid #E4A34E;
+    border-right: 4px solid #E4A34E;
 }
 
 .content {
@@ -21,7 +23,7 @@
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
-    border: 5px solid #E4A34E;
+    border: 2px solid rgba(0, 160, 255, 0.8);
 }
 
 

@@ -1,17 +1,27 @@
 .contact-container {
-    position: relative;
-    height: 100vh;
-    background: #F5F5DC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: #F0F0F0;
-  }
-  
+  position: relative;
+  height: 100vh;
+  background: #F5F5DC; 
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #F0F0F0;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}

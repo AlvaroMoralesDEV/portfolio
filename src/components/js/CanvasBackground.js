@@ -47,13 +47,15 @@ const icons = [
 const CanvasBackground = () => {
   const canvasRef = useRef(null);
   const images = useRef([]);
+  const dots = useRef([]);
+  const connectionDistance = 150;
+  const speed = 1; 
+  const activeDotIndex = useRef(null);
+  const highlightedDots = useRef(new Set());
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let dots = [];
-    const connectionDistance = 150;
-    const speed = 2;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -84,7 +86,7 @@ const CanvasBackground = () => {
     };
 
     const createDots = () => {
-      dots = [];
+      dots.current = [];
       icons.forEach((icon, index) => {
         if (images.current[index]) {
           let dx = (Math.random() - 0.5);
@@ -99,9 +101,27 @@ const CanvasBackground = () => {
             dy: normalized.dy,
             image: images.current[index]
           };
-          dots.push(dot);
+          dots.current.push(dot);
         }
       });
+    };
+
+    const findConnections = (index, visited) => {
+      if (visited.has(index)) return;
+      visited.add(index);
+
+      for (let j = 0; j < dots.current.length; j++) {
+        if (j !== index) {
+          const distance = Math.sqrt(
+            Math.pow(dots.current[index].x - dots.current[j].x, 2) +
+            Math.pow(dots.current[index].y - dots.current[j].y, 2)
+          );
+          if (distance < connectionDistance) {
+            highlightedDots.current.add(j);
+            findConnections(j, visited);
+          }
+        }
+      }
     };
 
     const drawConnections = (ctx, dots) => {
@@ -125,7 +145,7 @@ const CanvasBackground = () => {
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[index].x, dots[index].y);
-          ctx.strokeStyle = 'black';
+          ctx.strokeStyle = highlightedDots.current.has(index) ? 'rgba(0, 160, 255, 0.8)' : 'rgba(180, 180, 180, 0.6)'; // Updated colors
           ctx.lineWidth = 1;
           ctx.stroke();
         });
@@ -134,20 +154,18 @@ const CanvasBackground = () => {
 
     const drawDots = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawConnections(ctx, dots);
+      drawConnections(ctx, dots.current);
 
-      dots.forEach((dot) => {
+      dots.current.forEach((dot) => {
         ctx.drawImage(dot.image, dot.x - dot.radius / 2, dot.y - dot.radius / 2, dot.radius, dot.radius);
         dot.x += dot.dx;
         dot.y += dot.dy;
 
         if (dot.x < 0 || dot.x > canvas.width) {
           dot.dx = -dot.dx;
-          dot.dy += (Math.random() - 0.5) * 0.5; // Add random angle shift
         }
         if (dot.y < 0 || dot.y > canvas.height) {
           dot.dy = -dot.dy;
-          dot.dx += (Math.random() - 0.5) * 0.5; // Add random angle shift
         }
       });
     };
@@ -164,8 +182,28 @@ const CanvasBackground = () => {
     });
 
     window.addEventListener('resize', resizeCanvas);
+      const handleMouseMove = (event) => {
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+
+      activeDotIndex.current = null;
+      highlightedDots.current.clear();
+
+      dots.current.forEach((dot, index) => {
+        const distance = Math.sqrt(
+          (dot.x - mouseX) ** 2 + (dot.y - mouseY) ** 2
+        );
+        if (distance < dot.radius) {
+          activeDotIndex.current = index;
+          findConnections(index, new Set());
+        }
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
