@@ -35,7 +35,7 @@ const Posts = () => {
           color: '#F0F0F0',
           marginBottom: '2.5px',
         }}>
-          <h2><span style={{ color: '#e6b678' }}>Explore My Posts!</span></h2>
+          <h2><span style={{ color: '#e6b678' }}>Explore my Posts!</span></h2>
           <p>Here you'll find posts about various topics, including automation, coding, and more.</p>
         </div>
         <div className="posts-grid">
