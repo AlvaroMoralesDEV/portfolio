@@ -139,13 +139,13 @@ const CanvasBackground = () => {
         }
 
         distances.sort((a, b) => a.distance - b.distance);
-        const closestDots = distances.slice(0, 3);
+        const closestDots = distances.slice(0, 4);
 
         closestDots.forEach(({ index }) => {
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[index].x, dots[index].y);
-          ctx.strokeStyle = highlightedDots.current.has(index) ? 'rgba(0, 160, 255, 0.8)' : 'rgba(180, 180, 180, 0.6)'; // Updated colors
+          ctx.strokeStyle = highlightedDots.current.has(index) ? 'rgba(0, 160, 255, 0.8)' : 'rgba(180, 180, 180, 0.6)';
           ctx.lineWidth = 1;
           ctx.stroke();
         });
@@ -156,8 +156,12 @@ const CanvasBackground = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawConnections(ctx, dots.current);
 
-      dots.current.forEach((dot) => {
-        ctx.drawImage(dot.image, dot.x - dot.radius / 2, dot.y - dot.radius / 2, dot.radius, dot.radius);
+      dots.current.forEach((dot, index) => {
+        const isConnected = highlightedDots.current.has(index);
+        const isActive = activeDotIndex.current === index;
+        const size = (isActive || isConnected) ? dot.radius * 1.2 : dot.radius;
+
+        ctx.drawImage(dot.image, dot.x - size / 2, dot.y - size / 2, size, size);
         dot.x += dot.dx;
         dot.y += dot.dy;
 
@@ -182,7 +186,7 @@ const CanvasBackground = () => {
     });
 
     window.addEventListener('resize', resizeCanvas);
-      const handleMouseMove = (event) => {
+    const handleMouseMove = (event) => {
       const mouseX = event.clientX;
       const mouseY = event.clientY;
 
