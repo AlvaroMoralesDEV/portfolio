@@ -1,6 +1,7 @@
 .home-container {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
     background: #F5F5DC;
     display: flex;
     align-items: center;
@@ -8,6 +9,8 @@
     overflow: hidden;
     border-left: 4px solid #E4A34E;
     border-right: 4px solid #E4A34E;
+    padding: 0;
+    margin: 0;
 }
 
 .content {
@@ -15,7 +18,11 @@
     z-index: 1;
     text-align: center;
     color: #F0F0F0;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
 }
+
 
 .profile-image {
     width: 220px;
