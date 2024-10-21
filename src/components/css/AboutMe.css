@@ -8,31 +8,6 @@
   overflow: auto;
 }
 
-.section {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  position: relative;
-  color: #F5F5DC;
-  margin-bottom: 20px;
-}
-
-.profile-section {
-  background-color: rgba(0, 0, 0, 0.5);
-  margin-right: 40px;
-  flex-direction: column;
-  align-items: center;
-  width: 260px;
-}
-
-.profile-image {
-  width: 220px;
-  height: 250px; 
-  object-fit: cover;
-  border: 1.5px solid #E4A34E; 
-  border-radius: 8px; 
-  margin-bottom: 15px;
-}
 
 .contact-info {
   display: flex;
@@ -40,10 +15,103 @@
   margin-top: 20px;
 }
 
-.more-info {
-  color: #E4A34E;
-  text-align: right;
+.section {
+  background-color: rgba(20, 20, 20, 0.8); 
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.top-right-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.profile-section {
+  margin-right: 40px;
+  width: 300px;
+}
+
+.profile-image {
+  width: 260px;
+  height: 280px;
+  object-fit: cover;
+  border: 1.5px solid #E4A34E;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.skills-section {
+  flex-grow: 1;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.skill-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  min-height: 250px;
+}
+
+.skill-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.skill-box img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.skill-box h3 {
+  font-size: 20px;
+  margin: 5px 0;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.skill-box p {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+  color: rgba(20, 20, 20, 0.8);
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 10px;
+}
+
+.tag {
+  background-color: #E4A34E;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 2px;
+  font-size: 12px;
 }
 
 .social-icon {
@@ -56,50 +124,21 @@
   transform: scale(1.2);
 }
 
-.degree-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px; 
-  vertical-align: middle; 
-}
-
-.content {
-  flex-grow: 1;
+.skills-header {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  color: #333;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-h1 {
-  color: #ffffff;
-  margin-bottom: 15px;
-}
-
-
-
-.skills-list {
-  list-style: none;
-  padding-left: 20px; 
+.skills-header h1 {
   margin: 0;
 }
 
-.skills-list li {
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-.skill-category {
-  font-weight: bold;
-  color: #E4A34E;
-}
-
-.skills-list li span {
-  display: inline;
-}
-
-.skills-section {
-  padding: 10px;
+.section-icon {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
 }
 
 .experience-list, .education-list {
@@ -136,33 +175,48 @@ h1 {
   color: #F0F0F0;
 }
 
+.education-section {
+  margin-top: 30px; 
+  color: #F0F0F0;
+}
+
 .education-list {
   color: #F0F0F0;
 }
 
-.section-icon {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 15px;
-  right: 15px;
+.education-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
-.container {
-  overflow: auto;
+
+.degree-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px; 
+  vertical-align: middle; 
 }
 
-@media (max-width: 768px) {
-  .about-container {
-    flex-direction: column;
-    align-items: center;
-  }
+.experience-item p, .education-list li {
+  font-size: 16px;
+  color: #F0F0F0;
+}
 
-  .profile-section {
-    margin-bottom: 20px;
-  }
+.experience-link {
+  color: #E4A34E;
+  text-decoration: none;
+}
 
-  .content {
-    width: 100%;
-  }
+.experience-link:hover {
+  text-decoration: underline;
+}
+
+.more-info {
+  color: #E4A34E;
+  text-align: right;
+  text-decoration: none;
+}
+
+.more-info:hover {
+  text-decoration: underline;
 }
