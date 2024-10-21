@@ -8,7 +8,55 @@ import experienceIcon from '../../assets/icons/experience.png';
 import educationIcon from '../../assets/icons/education.png';
 import computerIcon from '../../assets/icons/computer.png';
 import businessIcon from '../../assets/icons/business.png';
+
+//skills icons
+import microservicesIcon from '../../assets/icons/microservices.png';
+import integrationIcon from '../../assets/icons/integration.png';
+import databaseIcon from '../../assets/icons/databases.png';
+import programmingIcon from '../../assets/icons/coding.png';
+import agileIcon from '../../assets/icons/cicd.png';
+import businessIconSkill from '../../assets/icons/businessProcess.png';
+
 import '../css/AboutMe.css';
+
+const skillsData = [
+  {
+    id: 1,
+    title: 'Languages and Frameworks',
+    tags: ['Java', 'JavaScript', 'TypeScript', 'C#', 'Spring Boot', 'Node.js', '.NET', 'Python', 'React', 'TDD/BDD', 'JUnit'],
+    icon: programmingIcon,
+  },
+  {
+    id: 2,
+    title: 'Microservices and API Development',
+    tags: ['Docker', 'REST', 'GraphQL', 'SOAP', 'Swagger', 'Postman', 'WireMock', 'Event-Driven Architecture'],
+    icon: microservicesIcon,
+  },
+  {
+    id: 3,
+    title: 'Integration Technologies',
+    tags: ['RabbitMQ', 'Apache Kafka', 'ActiveMQ', 'Apache Camel', 'n8n', 'Gravitee', 'WSO2'],
+    icon: integrationIcon,
+  },
+  {
+    id: 4,
+    title: 'Databases',
+    tags: ['SQL', 'NoSQL', 'Database Design', 'MySQL', 'PostgreSQL', 'MongoDB', 'DynamoDB'],
+    icon: databaseIcon,
+  },
+  {
+    id: 5,
+    title: 'Business Knowledge',
+    tags: ['Business Processes', 'ERP', 'Supply Chain', 'Accounting', 'Logistics', 'SAP'],
+    icon: businessIconSkill,
+  },
+  {
+    id: 6,
+    title: 'Agile Practices and CI/CD',
+    tags: ['Agile Methodology', 'Scrum', 'Kanban', 'Jenkins', 'Continuous Integration', 'Continuous Deployment'],
+    icon: agileIcon,
+  },
+];
 
 const AboutMe = () => {
   return (
@@ -19,7 +67,7 @@ const AboutMe = () => {
           <img src={profileImage} alt="Profile" className="profile-image" />
           <div className="profile-description">
             <p>
-              Hi! I'm <span style={{ color: '#E4A34E' }}>Alvaro Morales</span>, a passionate Software Engineer with experience in integration solutions, microservices, and distributed systems.
+              Hi! I'm <span style={{ color: '#FFA500' }}>Alvaro Morales</span>, a passionate Software Engineer with experience in integration solutions, microservices, and distributed systems.
             </p>
             <div className="contact-info">
               <a href="https://www.linkedin.com/in/alvaromoralesfenandez-ca%C3%B1adas/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
@@ -38,101 +86,71 @@ const AboutMe = () => {
 
       <div className="content">
         <div className="section skills-section">
-          <h1>Skills</h1>
-          <img src={skillsIcon} alt="Skills Icon" className="section-icon" />
-          <ul className="skills-list">
-            <li>
-              <span className="skill-category">Languages & Frameworks:</span>
-              &nbsp;Java, JavaScript, TypeScript, C#, Spring Boot, Node, .NET, Python
-            </li>
-            <li>
-              <span className="skill-category">Tools & Technologies:</span>
-              &nbsp;Docker, Apache Camel, Quarkus, Gravitee, N8n, Wso2, REST, SOAP, AMQP, MQTT, Nginx, JUnit, WireMock, Postman, Cucumber, Zabbix, Grafana
-            </li>
-            <li>
-              <span className="skill-category">Databases:</span>
-              &nbsp;MySQL, PostgreSQL, MongoDB, DynamoDB
-            </li>
-            <li>
-              <span className="skill-category">Concepts & Methodologies:</span>
-              &nbsp;Integration, Microservices, Distributed Systems, CI/CD, TDD/BDD, EDI, Supply Chain, Agile methodology
-            </li>
-          </ul>
+          <div className="skills-header">
+            <h1>Skills</h1>
+            <img src={skillsIcon} alt="Skills Icon" className="section-icon" />
+          </div>
+          <div className="skills-grid">
+            {skillsData.map(skill => (
+              <div key={skill.id} className="skill-box">
+                <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
+                <h3>{skill.title}</h3>
+                <div className="tags">
+                  {skill.tags.map((tag, index) => (
+                    <span key={index} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="section experience-section">
           <h1>Experience</h1>
-          <img src={experienceIcon} alt="Experience Icon" className="section-icon" />
-
+          <img src={experienceIcon} alt="Experience Icon" className="section-icon top-right-icon" />
           <div className="experience-item">
-            <h2 style={{ display: 'inline', marginRight: '10px', color: '#e6b678' }}>
-              <a href="https://www.chakray.com/es/" target="_blank" rel="noopener noreferrer" style={{ color: '#e6b678', textDecoration: 'none' }}>
+            <p>
+              Developed integration solutions within a microservices architecture focusing on accounting and logistics processes at&nbsp;
+              <a href="https://www.chakray.com/es/" target="_blank" rel="noopener noreferrer" className="experience-link">
                 Chakray Consulting
-              </a>
-            </h2>
-            <h5 style={{ margin: '5px 0', color: '#D9D9D9' }}>2022 - Current</h5>
-            <ul className="experience-list">
-              <li>
-                Developed <span style={{ color: '#E4A34E' }}>integration</span> solutions within a <span style={{ color: '#E4A34E' }}>microservices</span> architecture focusing on accounting and logistics processes.
-              </li>
-              <li>
-                Orchestrated message queuing systems and webhooks optimizing task scheduling and enabling real-time <span style={{ color: '#E4A34E' }}>data synchronization</span>.
-              </li>
-              <li>
-                Leveraged <span style={{ color: '#E4A34E' }}>API</span> managers to enhance system interoperability and security.
-              </li>
-              <li>
-                Utilized <span style={{ color: '#E4A34E' }}>databases</span> for efficient data querying and robust system integration.
-              </li>
-              <li>
-                Designed custom plugins and Cucumber steps to accelerate <span style={{ color: '#E4A34E' }}>quality assurance</span>.
-              </li>
-            </ul>
+              </a>&nbsp;
+              (2022 - Current)
+            </p>
           </div>
 
           <div className="experience-item" style={{ marginTop: '30px' }}>
-            <h2 style={{ display: 'inline', marginRight: '10px', color: '#e6b678' }}>
-              <a href="https://www.xeosefa.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#e6b678', textDecoration: 'none' }}>
-                Xeosefa (Intern)
-              </a>
-            </h2>
-            <h5 style={{ margin: '5px 0', color: '#D9D9D9' }}>2021 - 2022</h5>
-            <ul className="experience-list">
-              <li>
-                <span style={{ color: '#E4A34E' }}>Automated</span> accounting and logistics processes using .NET principles.
-              </li>
-              <li>
-                Integrated <span style={{ color: '#E4A34E' }}>DynamoDB (AWS)</span> into the application enhancing data handling for high-volume transactions.
-              </li>
-              <li>
-                Developed a cron job to <span style={{ color: '#E4A34E' }}>automate</span> batch order processing via REST API.
-              </li>
-              <li>
-                Synchronized the internal <span style={{ color: '#E4A34E' }}>ERP</span> system (A3) with the application using A3’s API.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="section education-section">
-          <h1>Education</h1>
-          <img src={educationIcon} alt="Education Icon" className="section-icon" />
-          <ul className="education-list">
-            <li>
-              Graduated in Computer Engineering (Graduated 2022)
-              <img src={computerIcon} alt="Computer Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
-            </li>
-            <li>
-              Graduated in Business Administration and Management (Graduated 2022)
-              <img src={businessIcon} alt="Business Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
-            </li>
-          </ul>
-          <div>
-            <a href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html" target="_blank" rel="noopener noreferrer" className="more-info">
-              University of Alicante
-            </a>
+            <p>
+              Automated accounting and logistics processes using .NET principles and integrated AWS services at&nbsp;
+              <a href="https://www.xeosefa.com/" target="_blank" rel="noopener noreferrer" className="experience-link">
+                Xeosefa
+              </a>&nbsp;
+              (Intern, 2021 - 2022)
+            </p>
           </div>
         </div>
 
+
+        <div className="section education-section">
+  <h1>Education</h1>
+  <img src={educationIcon} alt="Education Icon" className="section-icon top-right-icon" />
+  <div className="education-item" style={{ marginTop: '30px' }}>
+    <ul className="education-list">
+      <li>
+        Graduated in Computer Engineering (2022)
+        <img src={computerIcon} alt="Computer Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
+      </li>
+      <li>
+        Graduated in Business Administration and Management (2022)
+        <img src={businessIcon} alt="Business Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
+      </li>
+    </ul>
+    <div>
+      <a href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html" target="_blank" rel="noopener noreferrer" className="more-info">
+        University of Alicante
+      </a>
+    </div>
+  </div>
+</div>
       </div>
     </div>
   );
