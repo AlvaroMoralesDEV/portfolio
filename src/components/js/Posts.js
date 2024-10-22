@@ -1,9 +1,6 @@
-// src/components/js/Posts.js
-
 import React from 'react';
-import CanvasBackground from './CanvasBackground'; // Adjust the import if the path is different
-import n8nPostImage from '../../assets/images/n8n.jpg'; // Import the n8n post image
-import '../css/Posts.css'; // You can reuse this for custom styling
+import n8nPostImage from '../../assets/images/n8n.jpg';
+import '../css/Posts.css';
 
 const posts = [
   {
@@ -12,21 +9,20 @@ const posts = [
     description: 'Learn how to automate your workflows using n8n, a powerful open-source automation tool.',
     link: 'https://www.chakray.com/automating-processes-n8n/',
     image: n8nPostImage,
-    tags: ['Automation', 'n8n', 'Workflow'] // Add tags here
+    tags: ['Automation', 'n8n', 'Workflow']
   }
 ];
 
 const Posts = () => {
   return (
     <div className="home-container">
-      <CanvasBackground />
       <div className="content">
         <div style={{
           position: 'relative',
           padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)', // Increased opacity for better visibility
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
           borderRadius: '8px',
-          marginTop: '-20px', // Adjusted for better positioning
+          marginTop: '-20px',
           zIndex: 1,
           display: 'flex',
           flexDirection: 'column',

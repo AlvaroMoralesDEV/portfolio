@@ -22,13 +22,22 @@ body {
 
 main {
   flex: 1;
-  background-color: #F5F5DC;
-  color: #F5F5DC;
-  text-align: center;
+  position: relative;
+  background-color: #F5F5DC; 
 }
 
 footer {
   background-color: #4A4A4A;
   color: #fff;
   padding: 1rem;
+}
+
+
+.canvas-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
 }

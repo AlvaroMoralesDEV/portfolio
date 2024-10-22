@@ -2,18 +2,21 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  background: #F5F5DC;
+  background: transparent;
   min-height: 100vh;
   padding: 40px;
   overflow: auto;
 }
 
-
 .contact-info {
   display: flex;
-  gap: 40px;
-  margin-top: 20px;
+  gap: 20px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
+
 
 .section {
   background-color: rgba(20, 20, 20, 0.8); 
@@ -46,6 +49,7 @@
   border-radius: 10px;
   margin-bottom: 15px;
 }
+
 
 .skills-section {
   flex-grow: 1;
@@ -88,6 +92,8 @@
   font-size: 20px;
   margin: 5px 0;
   color: rgba(0, 0, 0, 0.9);
+  flex: 0 0 auto;
+  min-height: 40px;
 }
 
 .skill-box p {
@@ -104,14 +110,15 @@
   margin-top: 10px;
 }
 
-.tag {
+.skills-section .tag {
   background-color: #E4A34E;
-  color: white;
+  color: rgba(255, 255, 255, 0.9); 
   border-radius: 5px;
   padding: 5px 10px;
   margin: 2px;
   font-size: 12px;
 }
+
 
 .social-icon {
   width: 30px;

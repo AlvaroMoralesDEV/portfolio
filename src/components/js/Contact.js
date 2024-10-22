@@ -2,13 +2,11 @@ import React from 'react';
 import linkedinIcon from '../../assets/icons/linkedin.png';
 import githubIcon from '../../assets/icons/github.png';
 import gmailIcon from '../../assets/icons/gmail.png';
-import CanvasBackground from './CanvasBackground';
 import '../css/Contact.css';
 
 const Contact = () => {
   return (
     <div className="contact-container"> {}
-      <CanvasBackground />
       <div className="content">
         <div style={{
           position: 'relative',
