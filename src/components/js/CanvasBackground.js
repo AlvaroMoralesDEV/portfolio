@@ -10,7 +10,6 @@ import teamsIcon from '../../assets/icons/teams.png';
 import teamsSalesforce from '../../assets/icons/salesforce.png';
 import teamsPosIcon from '../../assets/icons/pos.png';
 import notionIcon from '../../assets/icons/notion.png';
-import rabbitIcon from '../../assets/icons/rabbit.png';
 import dockerIcon from '../../assets/icons/docker.png';
 import gitIcon from '../../assets/icons/git.png';
 import dropboxIcon from '../../assets/icons/dropbox.png';
@@ -39,7 +38,7 @@ const icons = [
   emailIcon, elasticsearchIcon, wordpressIcon, confluenceIcon,
   kuberIcon, telegramIcon, redisIcon, awsIcon, whaIcon, gptIcon,
   postmanIcon, swaggerIcon, mysqlIcon, discordIcon, twitterIcon, sapIcon,
-  slackIcon, teamsIcon, teamsSalesforce, teamsPosIcon, rabbitIcon, notionIcon,
+  slackIcon, teamsIcon, teamsSalesforce, teamsPosIcon, notionIcon,
   dockerIcon, gitIcon, dropboxIcon, webhookIcon, kafkaIcon, mongoIcon,
   postgressIcon, apiIcon, grafanaIcon, shopifyIcon, stripeIcon, paypalIcon, azureIcon
 ];
@@ -49,7 +48,7 @@ const CanvasBackground = () => {
   const images = useRef([]);
   const dots = useRef([]);
   const connectionDistance = 150;
-  const speed = 0.6; 
+  const speed = 1; 
   const activeDotIndex = useRef(null);
   const highlightedDots = useRef(new Set());
 

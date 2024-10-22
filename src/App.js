@@ -12,13 +12,13 @@ import './App.css';
 
 function App() {
   const location = useLocation();
-  const isAboutPage = location.pathname === '/about'; // Check if the current path is '/about'
+  const isAboutPage = location.pathname === '/about';
 
   return (
     <div className="app-container">
       <Header />
       <main style={{ position: 'relative' }}>
-        {/* Render CanvasBackground unless on the About page */}
+        {}
         {!isAboutPage && <CanvasBackground />}
         <div style={{ position: 'relative', zIndex: 1 }}>
           <Routes>
