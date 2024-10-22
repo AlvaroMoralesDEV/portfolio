@@ -11,11 +11,14 @@ import businessIcon from '../../assets/icons/business.png';
 
 //skills icons
 import microservicesIcon from '../../assets/icons/microservices.png';
-import integrationIcon from '../../assets/icons/integration.png';
 import databaseIcon from '../../assets/icons/databases.png';
 import programmingIcon from '../../assets/icons/coding.png';
 import agileIcon from '../../assets/icons/cicd.png';
 import businessIconSkill from '../../assets/icons/businessProcess.png';
+import apiIcon from '../../assets/icons/api.png';
+import testingIcon from '../../assets/icons/test.png';
+import softSkillsIcon from '../../assets/icons/softskills.png';
+
 
 import '../css/AboutMe.css';
 
@@ -23,40 +26,53 @@ const skillsData = [
   {
     id: 1,
     title: 'Languages and Frameworks',
-    tags: ['Java', 'JavaScript', 'TypeScript', 'C#', 'Spring Boot', 'Node.js', '.NET', 'Python', 'React', 'TDD/BDD', 'JUnit'],
+    tags: ['Java', 'JavaScript', 'C#', 'TypeScript', 'Python', 'Spring Boot', 'Node.js', '.NET', 'JUnit'],
     icon: programmingIcon,
   },
   {
     id: 2,
-    title: 'Microservices and API Development',
-    tags: ['Docker', 'REST', 'GraphQL', 'SOAP', 'Swagger', 'Postman', 'WireMock', 'Event-Driven Architecture'],
+    title: 'Microservices',
+    tags: ['Event-Driven Architecture', 'Docker', 'RabbitMQ', 'Apache Kafka', 'ActiveMQ', 'Apache Camel', 'n8n'],
     icon: microservicesIcon,
   },
   {
     id: 3,
-    title: 'Integration Technologies',
-    tags: ['RabbitMQ', 'Apache Kafka', 'ActiveMQ', 'Apache Camel', 'n8n', 'Gravitee', 'WSO2'],
-    icon: integrationIcon,
+    title: 'API Development',
+    tags: ['REST', 'SOAP', 'GraphQL', 'Swagger', 'Api Management', 'Gravitee'],
+    icon: apiIcon,
   },
   {
     id: 4,
     title: 'Databases',
-    tags: ['SQL', 'NoSQL', 'Database Design', 'MySQL', 'PostgreSQL', 'MongoDB', 'DynamoDB'],
+    tags: ['SQL', 'PostgreSQL', 'MySQL', 'NoSQL', 'MongoDB', 'DynamoDB', 'Database Design'],
     icon: databaseIcon,
   },
   {
     id: 5,
-    title: 'Business Knowledge',
-    tags: ['Business Processes', 'ERP', 'Supply Chain', 'Accounting', 'Logistics', 'SAP'],
-    icon: businessIconSkill,
+    title: 'Agile and Good Practices',
+    tags: ['Agile Methodology', 'Scrum', 'Kanban', 'Jenkins',  'Git', 'CI/CD', 'TDD/BDD', 'Confluence'],
+    icon: agileIcon, 
   },
   {
     id: 6,
-    title: 'Agile Practices and CI/CD',
-    tags: ['Agile Methodology', 'Scrum', 'Kanban', 'Jenkins', 'Continuous Integration', 'Continuous Deployment'],
-    icon: agileIcon,
+    title: 'Business Knowledge',
+    tags: ['Business Processes', 'ERP', 'Supply Chain', 'Accounting', 'Logistics', 'SAP', 'EDI'],
+    icon: businessIconSkill,
+  },
+  {
+    id: 7,
+    title: 'Testing and Quality Assurance',
+    tags: ['JUnit', 'Mockito', 'WireMock', 'Cucumber', 'Postman'],
+    icon: testingIcon,
+  },
+  {
+    id: 8,
+    title: 'Soft Skills',
+    tags: ['Teamwork', 'Adaptability', 'Critical Thinking', 'Problem Solving', 'Continous Learning'],
+    icon: softSkillsIcon,
   },
 ];
+
 
 const AboutMe = () => {
   return (
@@ -90,19 +106,20 @@ const AboutMe = () => {
             <h1>Skills</h1>
             <img src={skillsIcon} alt="Skills Icon" className="section-icon" />
           </div>
-          <div className="skills-grid">
-            {skillsData.map(skill => (
-              <div key={skill.id} className="skill-box">
-                <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
-                <h3>{skill.title}</h3>
-                <div className="tags">
-                  {skill.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+         <div className="skills-grid">
+  {skillsData.map(skill => (
+    <div key={skill.id} className="skill-box">
+      <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
+      <h3>{skill.title}</h3>
+      <div className="tags">
+        {skill.tags.map((tag, index) => (
+          <span key={index} className="tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
         </div>
 
         <div className="section experience-section">

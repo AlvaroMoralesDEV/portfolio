@@ -10,7 +10,6 @@ function Home() {
     "Process Improvement",
     "Workflow Optimization",
     "Data Analysis",
-    "Project Management",
     "Microservices"
   ];
 
@@ -38,6 +37,7 @@ function Home() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          marginTop: '50px',
         }}>
           { }
           <img src={profileImage} alt="Profile" className="profile-image" />
