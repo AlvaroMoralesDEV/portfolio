@@ -1,18 +1,19 @@
+.posts-container {
+  position: relative; 
+  height: 100vh;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+  padding: 20px;
+}
+
 .home-container {
   position: relative;
-  min-height: 100vh;
-  min-width: 100vw;
-  background: #F5F5DC;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
-  border-left: 4px solid #E4A34E;
-  border-right: 4px solid #E4A34E;
-  padding: 20px;
-  box-sizing: border-box;
+  height: 100vh;
 }
+
 
 .content {
   position: relative;
@@ -112,27 +113,27 @@
 
 @media (max-width: 600px) {
   .intro h2 {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   .intro p {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   .post-box {
-      max-width: 100%; 
-      padding: 5px;
+    max-width: 100%; 
+    padding: 5px;
   }
 
   .post-box h3 {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   .post-box p {
-      font-size: 11px;
+    font-size: 11px;
   }
 
   .tag {
-      font-size: 10px;
+    font-size: 10px;
   }
 }

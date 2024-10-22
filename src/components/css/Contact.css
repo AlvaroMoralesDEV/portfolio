@@ -1,11 +1,11 @@
 .contact-container {
-  position: relative;
+  position: relative; 
   height: 100vh;
-  background: #F5F5DC; 
   display: flex;
   align-items: center; 
   justify-content: center;
   overflow: hidden;
+  background: transparent;
 }
 
 .content {
@@ -14,6 +14,7 @@
   text-align: center;
   color: #F0F0F0;
 }
+
 
 .icon {
   width: 30px;

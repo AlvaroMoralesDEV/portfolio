@@ -49,7 +49,7 @@ const CanvasBackground = () => {
   const images = useRef([]);
   const dots = useRef([]);
   const connectionDistance = 150;
-  const speed = 1; 
+  const speed = 0.6; 
   const activeDotIndex = useRef(null);
   const highlightedDots = useRef(new Set());
 
@@ -139,7 +139,7 @@ const CanvasBackground = () => {
         }
 
         distances.sort((a, b) => a.distance - b.distance);
-        const closestDots = distances.slice(0, 4);
+        const closestDots = distances.slice(0, 3);
 
         closestDots.forEach(({ index }) => {
           ctx.beginPath();

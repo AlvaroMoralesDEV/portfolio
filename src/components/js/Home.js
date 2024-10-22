@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/Home.css';
 import profileImage from '../../assets/images/profile.jpg';
-import CanvasBackground from './CanvasBackground';
 
 function Home() {
   const skills = [
@@ -30,7 +29,6 @@ function Home() {
 
   return (
     <div className="home-container">
-      <CanvasBackground />
       <div className="content">
         { }
         <div style={{

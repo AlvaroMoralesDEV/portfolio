@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Ensure this line is present
+import { Link } from 'react-router-dom';
 import '../css/Header.css';
 
 function Header() {
