@@ -26,7 +26,7 @@ const skillsData = [
   {
     id: 1,
     title: 'Languages and Frameworks',
-    tags: ['Java', 'JavaScript', 'C#', 'TypeScript', 'Python', 'Spring Boot', 'Node.js', '.NET', 'JUnit'],
+    tags: ['Java', 'JavaScript', 'C#', 'TypeScript', 'Python', 'Spring Boot', 'Node.js', '.NET'],
     icon: programmingIcon,
   },
   {
@@ -50,8 +50,8 @@ const skillsData = [
   {
     id: 5,
     title: 'Agile and Good Practices',
-    tags: ['Agile Methodology', 'Scrum', 'Kanban', 'Jenkins',  'Git', 'CI/CD', 'TDD/BDD', 'Confluence'],
-    icon: agileIcon, 
+    tags: ['Agile Methodology', 'Scrum', 'Kanban', 'Jenkins', 'Git', 'CI/CD', 'TDD/BDD', 'Confluence'],
+    icon: agileIcon,
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const skillsData = [
   {
     id: 7,
     title: 'Testing and Quality Assurance',
-    tags: ['JUnit', 'Mockito', 'WireMock', 'Cucumber', 'Postman'],
+    tags: ['JUnit', 'Cucumber', 'Mockito', 'Postman', 'WireMock'],
     icon: testingIcon,
   },
   {
@@ -106,19 +106,19 @@ const AboutMe = () => {
             <h1>Skills</h1>
             <img src={skillsIcon} alt="Skills Icon" className="section-icon" />
           </div>
-         <div className="skills-grid">
-  {skillsData.map(skill => (
-    <div key={skill.id} className="skill-box">
-      <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
-      <h3>{skill.title}</h3>
-      <div className="tags">
-        {skill.tags.map((tag, index) => (
-          <span key={index} className="tag">{tag}</span>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
+          <div className="skills-grid">
+            {skillsData.map(skill => (
+              <div key={skill.id} className="skill-box">
+                <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
+                <h3>{skill.title}</h3>
+                <div className="tags">
+                  {skill.tags.map((tag, index) => (
+                    <span key={index} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
         </div>
 
@@ -137,7 +137,7 @@ const AboutMe = () => {
 
           <div className="experience-item" style={{ marginTop: '30px' }}>
             <p>
-              Automated accounting and logistics processes using .NET principles and integrated AWS services at&nbsp;
+              Automated supply chain processes using .NET and integrated AWS services at&nbsp;
               <a href="https://www.xeosefa.com/" target="_blank" rel="noopener noreferrer" className="experience-link">
                 Xeosefa
               </a>&nbsp;
@@ -146,28 +146,27 @@ const AboutMe = () => {
           </div>
         </div>
 
-
         <div className="section education-section">
-  <h1>Education</h1>
-  <img src={educationIcon} alt="Education Icon" className="section-icon top-right-icon" />
-  <div className="education-item" style={{ marginTop: '30px' }}>
-    <ul className="education-list">
-      <li>
-        Graduated in Computer Engineering (2022)
-        <img src={computerIcon} alt="Computer Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
-      </li>
-      <li>
-        Graduated in Business Administration and Management (2022)
-        <img src={businessIcon} alt="Business Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
-      </li>
-    </ul>
-    <div>
-      <a href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html" target="_blank" rel="noopener noreferrer" className="more-info">
-        University of Alicante
-      </a>
-    </div>
-  </div>
-</div>
+          <h1>Education</h1>
+          <img src={educationIcon} alt="Education Icon" className="section-icon top-right-icon" />
+          <div className="education-item" style={{ marginTop: '30px' }}>
+            <ul className="education-list">
+              <li>
+                Graduated in Computer Engineering (2022)
+                <img src={computerIcon} alt="Computer Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
+              </li>
+              <li>
+                Graduated in Business Administration and Management (2022)
+                <img src={businessIcon} alt="Business Icon" className="degree-icon" style={{ marginLeft: '10px' }} />
+              </li>
+            </ul>
+            <div>
+              <a href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html" target="_blank" rel="noopener noreferrer" className="more-info">
+                University of Alicante
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
