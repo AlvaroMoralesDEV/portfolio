@@ -34,6 +34,7 @@ import whaIcon from '../../assets/icons/wha.png';
 import telegramIcon from '../../assets/icons/telegram.png';
 import wordpressIcon from '../../assets/icons/wordpress.png';
 
+
 const icons = [
   emailIcon, elasticsearchIcon, wordpressIcon, confluenceIcon,
   kuberIcon, telegramIcon, redisIcon, awsIcon, whaIcon, gptIcon,
@@ -155,15 +156,20 @@ const CanvasBackground = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawConnections(ctx, dots.current);
 
+      // Use a fixed position for drawing dots
       dots.current.forEach((dot, index) => {
         const isConnected = highlightedDots.current.has(index);
         const isActive = activeDotIndex.current === index;
         const size = (isActive || isConnected) ? dot.radius * 1.2 : dot.radius;
 
+        // Draw the dot at its current position
         ctx.drawImage(dot.image, dot.x - size / 2, dot.y - size / 2, size, size);
+        
+        // Update dot positions based on speed and direction
         dot.x += dot.dx;
         dot.y += dot.dy;
 
+        // Reverse direction on hitting canvas boundaries
         if (dot.x < 0 || dot.x > canvas.width) {
           dot.dx = -dot.dx;
         }
@@ -208,6 +214,7 @@ const CanvasBackground = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resizeCanvas);
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas on unmount
     };
   }, []);
 
@@ -215,12 +222,12 @@ const CanvasBackground = () => {
     <canvas
       ref={canvasRef}
       style={{
-        position: 'absolute',
+        position: 'fixed', // Fixed position to cover the entire viewport
         top: 0,
         left: 0,
         zIndex: 0,
-        width: '100%',
-        height: '100%',
+        width: '100vw',
+        height: '100vh',
       }}
     />
   );

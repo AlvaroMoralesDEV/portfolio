@@ -1,139 +1,116 @@
+/* src/components/css/Posts.css */
+
 .posts-container {
-  position: relative; 
-  height: 100vh;
+  position: relative;
+  min-height: 100vh; /* Full height for better presentation */
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: transparent;
+  background: transparent; /* No background */
   padding: 20px;
 }
-
-.home-container {
-  position: relative;
-  height: 100vh;
-}
-
 
 .content {
   position: relative;
   z-index: 1;
   text-align: center;
-  color: #333;
+  color: #333; /* Default text color */
   padding: 10px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px; /* Same as skills section */
 }
 
 .intro {
-  position: relative;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6); /* Dark background for better contrast */
   border-radius: 8px;
-  z-index: 1;
-  color: #F0F0F0;
+  color: #F0F0F0; /* Header text color */
   margin-bottom: 20px;
 }
 
 .intro h2 {
-  font-size: 24px;
-}
-
-.intro p {
-  font-size: 16px;
+  font-size: 24px; /* Size of the header */
 }
 
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Responsive grid */
+  gap: 15px; /* Spacing between posts */
   margin-top: 15px;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-start; /* Align posts to the left */
 }
 
 .post-box {
-  background-color: rgba(244, 244, 244, 0.9);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.9); /* Background color for posts */
+  border: 2px solid #E4A34E; /* Border color to match */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Inner spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); /* Soft shadow */
+  transition: transform 0.2s, box-shadow 0.2s; /* Animation on hover */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 300px; /* Increased minimum height for larger content */
+  cursor: pointer; /* Change mouse cursor to pointer */
 }
 
+
 .post-box:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 .post-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px 8px 0 0;
+  width: 100%; /* Full width for images */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
 }
 
 .post-box h3 {
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 20px; /* Larger title size */
+  margin: 5px 0;
+  color: black; /* Title color */
 }
 
 .post-box p {
-  font-size: 12px;
+  font-size: 14px; /* Larger description size */
   margin-bottom: 5px;
-}
-
-.post-box a {
-  text-decoration: none;
-  color: #e6b678;
-  font-weight: bold;
-}
-
-.post-box a:hover {
-  text-decoration: underline;
+  color: rgb(38, 38, 38); /* Description color */
 }
 
 .tags {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  justify-content: flex-start; /* Align tags to the left */
+  flex-wrap: wrap; /* Allow tags to wrap */
+  margin-top: 10px; /* Spacing above tags */
 }
 
 .tag {
-  background-color: #E4A34E;
-  color: white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin: 2px;
-  font-size: 12px;
+  background-color: #E4A34E; /* Tag background color */
+  color: white; /* Tag text color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 5px 10px; /* Padding inside tags */
+  margin: 2px; /* Spacing between tags */
+  font-size: 12px; /* Font size for tags */
+  cursor: pointer; /* Change mouse cursor to pointer */
 }
 
+/* Responsive styles */
 @media (max-width: 600px) {
   .intro h2 {
-    font-size: 18px;
-  }
-
-  .intro p {
-    font-size: 14px;
-  }
-
-  .post-box {
-    max-width: 100%; 
-    padding: 5px;
+    font-size: 18px; /* Adjusted size for small screens */
   }
 
   .post-box h3 {
-    font-size: 14px;
+    font-size: 18px; /* Slightly smaller title on small screens */
   }
 
   .post-box p {
-    font-size: 11px;
+    font-size: 12px; /* Smaller description on small screens */
   }
 
   .tag {
-    font-size: 10px;
+    font-size: 10px; /* Smaller tag size on small screens */
   }
 }

@@ -1,43 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Header from './components/js/Header';
-import Footer from './components/js/Footer';
-import Home from './components/js/Home';
-import AboutMe from './components/js/aboutMe';
-import Contact from './components/js/Contact'; 
+import { Element } from 'react-scroll';
+import Presentation from './components/js/Presentation';
+import Contact from './components/js/Contact';
 import Posts from './components/js/Posts';
+import Education from './components/js/Education';
+import Experience from './components/js/Experience';
 import CanvasBackground from './components/js/CanvasBackground';
-
+import Skills from './components/js/Skills';
 import './App.css';
 
 function App() {
-  const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
-
   return (
     <div className="app-container">
-      <Header />
-      <main style={{ position: 'relative' }}>
-        {}
-        {!isAboutPage && <CanvasBackground />}
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutMe />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/posts" element={<Posts />} />
-          </Routes>
-        </div>
-      </main>
-      <Footer />
+      <CanvasBackground /> {}
+      <Element name="presentation">
+        <Presentation />
+      </Element>
+      <Element name="skills">
+        <Skills />
+      </Element>
+      <Element name="experience">
+        <Experience />
+      </Element>
+      <Element name="education">
+        <Education />
+      </Element>
+      <Element name="posts">
+        <Posts />
+      </Element>
+      <Element name="contact">
+        <Contact />
+      </Element>
     </div>
   );
 }
 
-export default function AppWrapper() {
-  return (
-    <Router>
-      <App />
-    </Router>
-  );
-}
+export default App;

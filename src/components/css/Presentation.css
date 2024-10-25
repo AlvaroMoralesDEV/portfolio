@@ -1,0 +1,110 @@
+/* Center the entire presentation within the viewport */
+.home-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  max-width: 900px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-content {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.profile-image {
+  width: 260px;
+  height: 300px;
+  object-fit: cover;
+  border: 2px solid #E4A34E;
+  border-radius: 15px;
+  margin-right: 25px;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+.text-container {
+  flex: 1;
+  color: #F0F0F0;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.2em;
+}
+
+.highlight {
+  color: #E4A34E;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.rotating-skills {
+  font-size: 1.5em;
+  color: #E4A34E;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.contact-icons {
+  margin-top: 20px;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  margin: 0 8px;
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+  .content {
+      max-width: 95%;
+  }
+
+  .intro-content {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .profile-image {
+      margin-bottom: 20px;
+  }
+
+  .text-container {
+      text-align: center;
+  }
+}
