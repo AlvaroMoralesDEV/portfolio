@@ -77,7 +77,7 @@ const skillsData = [
 const AboutMe = () => {
   return (
     <div className="about-container">
-      <div className="section profile-section">
+<div className="profile-section">
         <h1>About Me</h1>
         <div className="profile-info">
           <img src={profileImage} alt="Profile" className="profile-image" />
@@ -99,7 +99,7 @@ const AboutMe = () => {
           </div>
         </div>
       </div>
-
+      
       <div className="content">
         <div className="section skills-section">
           <div className="skills-header">
