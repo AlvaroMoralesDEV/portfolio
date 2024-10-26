@@ -1,6 +1,6 @@
 # Portfolio App
 
-Welcome to my personal portfolio application!
+Welcome to my personal portfolio application! My idea is to 
 
 ## Available Scripts
 

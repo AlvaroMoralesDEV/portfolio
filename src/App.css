@@ -10,7 +10,7 @@ html, body {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #F5F5DC;
   color: #56564E;
 }
 
@@ -18,18 +18,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  border: 5px solid #E4A34E;;
 }
 
 main {
   flex: 1;
   position: relative;
   background-color: #F5F5DC; 
-}
-
-footer {
-  background-color: #4A4A4A;
-  color: #fff;
-  padding: 1rem;
 }
 
 

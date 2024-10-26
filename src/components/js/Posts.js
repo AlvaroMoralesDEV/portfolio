@@ -1,3 +1,4 @@
+// src/components/js/Posts.js
 import React from 'react';
 import n8nPostImage from '../../assets/images/n8n.jpg';
 import '../css/Posts.css';
@@ -15,31 +16,17 @@ const posts = [
 
 const Posts = () => {
   return (
-    <div className="home-container">
+    <div className="posts-container">
       <div className="content">
-        <div style={{
-          position: 'relative',
-          padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          borderRadius: '8px',
-          marginTop: '-20px',
-          zIndex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          color: '#F0F0F0',
-          marginBottom: '2.5px',
-        }}>
-          <h2><span style={{ color: '#e6b678' }}>Explore my Posts!</span></h2>
-          <p>Here you'll find posts about various topics, including automation, coding, and more.</p>
+        <div className="intro">
+          <h2><span style={{ color: '#E4A34E' }}>Explore my Posts!</span></h2>
         </div>
         <div className="posts-grid">
           {posts.map(post => (
-            <div key={post.id} className="post-box" onClick={() => window.open(post.link, '_blank')}> {}
-              {post.image && <img src={post.image} alt={`${post.title}`} className="post-image" />} {}
-              <h3>{post.title}</h3>
-              <p>{post.description}</p>
+            <div key={post.id} className="post-box" onClick={() => window.open(post.link, '_blank')}>
+              {post.image && <img src={post.image} alt={post.title} className="post-image" />}
+              <h3 style={{ color: 'black' }}>{post.title}</h3> {}
+              <p style={{ color: 'black' }}>{post.description}</p> {}
               <div className="tags">
                 {post.tags.map((tag, index) => (
                   <span key={index} className="tag">{tag}</span>
