@@ -25,7 +25,7 @@ const skillsData = [
   {
     id: 3,
     title: 'API Development',
-    tags: ['REST', 'SOAP', 'GraphQL', 'Swagger', 'Api Management', 'Gravitee'],
+    tags: ['REST', 'SOAP', 'GraphQL', 'Swagger', 'Api Management', 'Gravitee', 'Webhook'],
     icon: apiIcon,
   },
   {

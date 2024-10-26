@@ -35,7 +35,7 @@ function Presentation() {
                 <div className="intro-content">
                     <img src={profileImage} alt="Profile" className="profile-image" />
                     <div className="text-container">
-                        <h1>Hi! I'm <span className="highlight">Alvaro Morales</span></h1>
+                        <h1>Hi! I'm <span style={{ color: '#E4A34E' }}>Alvaro Morales</span></h1>
                         <p>
                         I love being a software engineer! My focus is on creating innovative integration solutions that streamline processes and enhance user experiences. I’m passionate about building efficient systems that connect diverse platforms seamlessly                        </p>
                         <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>

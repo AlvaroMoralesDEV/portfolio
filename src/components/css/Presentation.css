@@ -44,13 +44,13 @@
   color: #F0F0F0;
 }
 
+.text-container h1 {
+  color: #ffffff;
+} 
+
 h1 {
   font-size: 2em;
   margin-bottom: 0.2em;
-}
-
-.highlight {
-  color: #E4A34E;
 }
 
 p {
