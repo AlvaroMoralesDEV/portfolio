@@ -1,11 +1,8 @@
 .contact-container {
-  position: relative; 
-  height: 100vh;
+  padding: 20px; 
   display: flex;
-  align-items: center; 
-  justify-content: center;
-  overflow: hidden;
-  background: transparent;
+  flex-direction: column;
+  align-items: center;
 }
 
 .content {
@@ -15,6 +12,9 @@
   color: #F0F0F0;
 }
 
+.section-background {
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+}
 
 .icon {
   width: 30px;
