@@ -1,4 +1,3 @@
-// src/components/js/Posts.js
 import React from 'react';
 import n8nPostImage from '../../assets/images/n8n.jpg';
 import '../css/Posts.css';
