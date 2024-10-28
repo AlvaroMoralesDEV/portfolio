@@ -4,6 +4,7 @@ import profileImage from '../../assets/images/profile.jpg';
 import linkedinIcon from '../../assets/icons/linkedin.png';
 import githubIcon from '../../assets/icons/github.png';
 import gmailIcon from '../../assets/icons/gmail.png';
+import cvFile from '../../assets/CV.pdf';
 
 function Presentation() {
     const skills = [
@@ -29,6 +30,15 @@ function Presentation() {
         return () => clearInterval(interval);
     }, [skills.length]);
 
+    const downloadCV = () => {
+        const link = document.createElement('a');
+        link.href = cvFile;
+        link.download = 'Alvaro_Morales_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <div className="home-container">
             <div className="content">
@@ -37,7 +47,8 @@ function Presentation() {
                     <div className="text-container">
                         <h1>Hi! I'm <span style={{ color: '#E4A34E' }}>Alvaro Morales</span></h1>
                         <p>
-                        I love being a software engineer! My focus is on creating innovative integration solutions that streamline processes and enhance user experiences. I’m passionate about building efficient systems that connect diverse platforms seamlessly                        </p>
+                            I love being a  <span style={{ color: '#E4A34E' }}>software engineer</span>! My focus is on creating innovative integration solutions that streamline processes and improve system interoperability. I’m passionate about building efficient systems that connect diverse platforms seamlessly.
+                        </p>
                         <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
                             {skills[currentSkillIndex]}
                         </h2>
@@ -52,6 +63,10 @@ function Presentation() {
                                 <img src={githubIcon} alt="GitHub" className="icon" />
                             </a>
                         </div>
+                        {}
+                        <button className="download-cv-button" onClick={downloadCV}>
+                            Download CV
+                        </button>
                     </div>
                 </div>
             </div>

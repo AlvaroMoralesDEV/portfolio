@@ -108,3 +108,27 @@ p {
       text-align: center;
   }
 }
+
+.intro-content {
+  position: relative;
+}
+
+.download-cv-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #E4A34E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.download-cv-button:hover {
+  background-color: #d4a03e;
+  transform: scale(1.05);
+}
+
