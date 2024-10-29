@@ -4,7 +4,7 @@ import profileImage from '../../assets/images/profile.jpg';
 import linkedinIcon from '../../assets/icons/linkedin.png';
 import githubIcon from '../../assets/icons/github.png';
 import gmailIcon from '../../assets/icons/gmail.png';
-import cvFile from '../../assets/CV.pdf';
+import cvFile from '../../assets/AlvaroMorales_CV.pdf';
 
 function Presentation() {
     const skills = [

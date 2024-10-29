@@ -1,4 +1,3 @@
-/* Center the entire presentation within the viewport */
 .home-container {
   position: relative;
   min-height: 100vh;
@@ -132,3 +131,10 @@ p {
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+  .download-cv-button {
+      position: static; 
+      margin-top: 20px;
+      align-self: center;
+  }
+}
