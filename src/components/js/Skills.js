@@ -31,7 +31,7 @@ const skillsData = [
   {
     id: 4,
     title: 'Databases',
-    tags: ['SQL', 'PostgreSQL', 'MySQL', 'NoSQL', 'MongoDB', 'DynamoDB', 'Database Design'],
+    tags: ['SQL', 'PostgreSQL', 'MySQL', 'NoSQL', 'MongoDB', 'DynamoDB', 'Redis', 'Database Design'],
     icon: databaseIcon,
   },
   {
