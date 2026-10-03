@@ -7,11 +7,11 @@ import gmailIcon from '../../assets/icons/gmail.png';
 
 function Presentation() {
     const skills = [
-        "Business Process Automation",
-        "Systems Integration Engineer",
-        "Process Improvement",
-        "Workflow Optimization",
-        "Microservices"
+        "AI Agent Engineering",
+        "RAG & Model Context Protocol",
+        "Client-Facing Engineering",
+        "Systems Integration",
+        "Business Process Automation"
     ];
 
     const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
@@ -37,7 +37,7 @@ function Presentation() {
                     <div className="text-container">
                         <h1>Hi! I'm <span style={{ color: '#E4A34E' }}>Alvaro Morales</span></h1>
                         <p>
-                            I love being a  <span style={{ color: '#E4A34E' }}>software engineer</span>! My focus is on creating innovative integration solutions that streamline processes and improve system interoperability. I’m passionate about building efficient systems that connect diverse platforms seamlessly.
+                            I love being a  <span style={{ color: '#E4A34E' }}>software engineer</span>! These days I focus on <span style={{ color: '#E4A34E' }}>AI agents</span>: building RAG pipelines, MCP servers and the integrations that plug them into the systems companies already run. I enjoy working directly with clients, understanding their real problems, and shipping solutions that make it to production.
                         </p>
                         <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
                             {skills[currentSkillIndex]}
