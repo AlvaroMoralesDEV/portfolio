@@ -37,7 +37,7 @@ function Presentation() {
                     <div className="text-container">
                         <h1>Hi! I'm <span style={{ color: '#E4A34E' }}>Alvaro Morales</span></h1>
                         <p>
-                            I love being a  <span style={{ color: '#E4A34E' }}>software engineer</span>! These days I focus on <span style={{ color: '#E4A34E' }}>AI agents</span>: building RAG pipelines, MCP servers and the integrations that plug them into the systems companies already run. I enjoy working directly with clients, understanding their real problems, and shipping solutions that make it to production.
+                            I love being a  <span style={{ color: '#E4A34E' }}>software engineer</span>! I focus on <span style={{ color: '#E4A34E' }}>AI agents</span>. Building RAG pipelines, MCP servers and the integrations that plug them into the systems companies already run. I enjoy working directly with clients, understanding their real problems, and shipping solutions that make it to production.
                         </p>
                         <h2 className={`rotating-skills ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
                             {skills[currentSkillIndex]}
