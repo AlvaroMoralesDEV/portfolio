@@ -9,7 +9,7 @@ const Experience = () => {
       <img src={experienceIcon} alt="Experience Icon" className="section-icon top-right-icon" />
       <div className="experience-item">
         <p>
-          Developed integration solutions within a microservices architecture focusing on accounting and logistics processes at&nbsp;
+          Partnering with clients to design and ship AI agents and integrations that automate their business workflows at&nbsp;
           <a href="https://www.chakray.com/es/" target="_blank" rel="noopener noreferrer" className="experience-link">
             Chakray Consulting
           </a>&nbsp;

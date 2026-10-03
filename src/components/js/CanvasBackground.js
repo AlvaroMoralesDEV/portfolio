@@ -179,12 +179,16 @@ const CanvasBackground = () => {
       });
     };
 
+    let animationFrameId;
+    let cancelled = false;
+
     const animate = () => {
       drawDots();
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     loadImages().then(() => {
+      if (cancelled) return;
       resizeCanvas();
       createDots();
       animate();
@@ -212,6 +216,8 @@ const CanvasBackground = () => {
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
+      cancelled = true;
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resizeCanvas);
       ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas on unmount
