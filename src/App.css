@@ -36,3 +36,17 @@ main {
   bottom: 0;
   z-index: 0;
 }
+
+/* Wrapper for the page sections; transparent so the canvas background stays visible. */
+main.app-main {
+  background-color: transparent;
+}
+
+/* Sections receive focus from the navbar; no visible ring needed on the whole section. */
+.app-section:focus {
+  outline: none;
+}
+
+html {
+  scroll-padding-top: 70px; /* keeps anchored sections clear of the sticky navbar */
+}

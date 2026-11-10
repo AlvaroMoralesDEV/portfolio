@@ -7,7 +7,7 @@ import databaseIcon from '../../assets/icons/databases.png';
 import agileIcon from '../../assets/icons/cicd.png';
 import businessIconSkill from '../../assets/icons/businessProcess.png';
 import softSkillsIcon from '../../assets/icons/softskills.png';
-import '../css/Skills.css';
+import { Reveal, SectionHeading, Tags } from './ui';
 
 const skillsData = [
   {
@@ -49,7 +49,7 @@ const skillsData = [
   {
     id: 7,
     title: 'Business Knowledge',
-    tags: ['Business Processes', 'ERP (Odoo, A3, SAP)', 'POS', 'E-commerce', 'Supply Chain', 'Accounting', 'Logistics'],
+    tags: ['Business Processes', 'ERP (Odoo, A3, SAP)', 'Point of Sale', 'E-commerce', 'Supply Chain', 'Accounting', 'Logistics'],
     icon: businessIconSkill,
   },
   {
@@ -62,23 +62,20 @@ const skillsData = [
 
 const Skills = () => {
   return (
-    <div className="skills-container"> {}
-      <div className="content">
-        <div className="skills-grid">
-          {skillsData.map(skill => (
-            <div key={skill.id} className="skill-box">
-              <img src={skill.icon} alt={`${skill.title} Icon`} className="skill-icon" />
-              <h3>{skill.title}</h3>
-              <div className="tags">
-                {skill.tags.map((tag, index) => (
-                  <span key={index} className="tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <section className="pf-section" aria-labelledby="skills-title">
+      <SectionHeading id="skills-title" eyebrow="What I work with" title="Skills" />
+      <Reveal as="ul" className="skills-grid">
+        {skillsData.map((skill, i) => (
+          <li key={skill.id} className="pf-card skill-card" style={{ '--i': i }}>
+            <span className="pf-icon-tile">
+              <img src={skill.icon} alt="" />
+            </span>
+            <h3>{skill.title}</h3>
+            <Tags items={skill.tags} label={`${skill.title} skills`} />
+          </li>
+        ))}
+      </Reveal>
+    </section>
   );
 };
 

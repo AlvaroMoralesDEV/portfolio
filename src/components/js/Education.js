@@ -1,37 +1,48 @@
 import React from 'react';
 import computerIcon from '../../assets/icons/computer.png';
 import businessIcon from '../../assets/icons/business.png';
-import educationIcon from '../../assets/icons/education.png';
-import '../css/ExperienceEducation.css';
+import { Reveal, SectionHeading } from './ui';
+
+const DEGREES = [
+  {
+    title: 'Computer Engineering',
+    text: 'The engineering side: how to design and build software systems.',
+    icon: computerIcon,
+  },
+  {
+    title: 'Business Administration and Management',
+    text: 'The business side: how the companies I build for actually operate.',
+    icon: businessIcon,
+  },
+];
 
 const Education = () => {
   return (
-    <div className="section education-section section-background"> {}
-      <h1><span style={{ color: '#E4A34E' }}>Education</span></h1>
-      <img src={educationIcon} alt="Education Icon" className="section-icon top-right-icon" />
-      <div className="education-item">
-        <ul className="education-list">
-          <p>
-            Graduated in Computer Engineering (2022)
-            <img src={computerIcon} alt="Computer Icon" className="degree-icon" />
-          </p>
-          <p>
-            Graduated in Business Administration and Management (2022)
-            <img src={businessIcon} alt="Business Icon" className="degree-icon" />
-          </p>
-        </ul>
-        <div className="university-item">
-          <a 
-            href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="more-info"
-          >
-            University of Alicante
-          </a>
-        </div>
-      </div>
-    </div>
+    <section className="pf-section" aria-labelledby="education-title">
+      <SectionHeading id="education-title" eyebrow="Double degree · Graduated 2022" title="Education" />
+      <Reveal as="ul" className="edu-grid">
+        {DEGREES.map((d, i) => (
+          <li key={d.title} className="pf-card edu-card" style={{ '--i': i }}>
+            <span className="pf-icon-tile">
+              <img src={d.icon} alt="" />
+            </span>
+            <div>
+              <h3>{d.title}</h3>
+              <p>{d.text}</p>
+            </div>
+          </li>
+        ))}
+      </Reveal>
+      <p className="edu-school">
+        <a
+          href="https://web.ua.es/es/grados/grado-en-i2ade/plan-de-estudios.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          University of Alicante <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </section>
   );
 };
 
