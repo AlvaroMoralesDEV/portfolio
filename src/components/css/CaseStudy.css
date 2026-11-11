@@ -2,10 +2,11 @@
    Every colour is the existing portfolio palette (orange accent, dark panel,
    light text, white cards, beige), aliased here for readability. */
 
-.cs-section {
+.cs-section,
+.cs-page {
   --cs-accent: #E4A34E;       /* brand orange used across the site */
   --cs-accent-dark: #d4a03e;  /* hover orange (Presentation.css) */
-  --cs-panel: rgba(0, 0, 0, 0.6);
+  --cs-panel: rgba(0, 0, 0, 0.85);
   --cs-text-light: #F0F0F0;
   --cs-text-dark: #56564E;    /* body text colour (App.css) */
   --cs-card: rgba(255, 255, 255, 0.9);
@@ -15,7 +16,18 @@
   --cs-accent-soft: rgba(228, 163, 78, 0.45);
   --cs-line: rgba(240, 240, 240, 0.16);
   --cs-well: rgba(0, 0, 0, 0.3);
+  /* spacing scale and text measure */
+  --cs-s1: 4px;
+  --cs-s2: 8px;
+  --cs-s3: 12px;
+  --cs-s4: 16px;
+  --cs-s5: 24px;
+  --cs-s6: 32px;
+  --cs-s7: 48px;
+  --cs-measure: 68ch;
+}
 
+.cs-section {
   position: relative;
   z-index: 1;
   width: calc(100% - 32px);
@@ -76,7 +88,7 @@
   background: var(--cs-well);
 }
 
-.cs-header h2 {
+.cs-header h1 {
   font-size: clamp(1.45em, 3.6vw, 2.3em);
   line-height: 1.2;
   color: #ffffff;
@@ -84,7 +96,11 @@
   max-width: 820px;
 }
 
-.cs-header h2 span {
+.cs-header h1:focus {
+  outline: none; /* focused from script on page open, not by the user */
+}
+
+.cs-header h1 span {
   color: var(--cs-accent);
 }
 
@@ -202,11 +218,8 @@
 }
 
 /* ---------- Blocks ---------- */
-.cs-block {
-  margin-top: 46px;
-}
-
-.cs-block h3 {
+.cs-block-title,
+.cs-subheading {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -215,7 +228,8 @@
   margin-bottom: 16px;
 }
 
-.cs-block h3::after {
+.cs-block-title::after,
+.cs-subheading::after {
   content: '';
   flex: 1;
   height: 1px;
@@ -355,7 +369,7 @@
   padding: 14px 16px;
 }
 
-.cs-ba-col h4 {
+.cs-ba-col h3 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.8em;
@@ -382,7 +396,7 @@
   background: var(--cs-well);
 }
 
-.cs-ba-col.is-before h4,
+.cs-ba-col.is-before h3,
 .cs-ba-col.is-before li {
   color: rgba(240, 240, 240, 0.8);
 }
@@ -398,7 +412,7 @@
   box-shadow: 0 0 26px rgba(228, 163, 78, 0.2);
 }
 
-.cs-ba-col.is-after h4 {
+.cs-ba-col.is-after h3 {
   color: var(--cs-accent);
 }
 
@@ -464,7 +478,7 @@
 
 .cs-tl-item.is-last .cs-tl-dot {
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   box-shadow: 0 0 0 5px rgba(228, 163, 78, 0.25), 0 0 20px var(--cs-glow);
 }
 
@@ -603,7 +617,7 @@
   height: 22px;
   border-radius: 50%;
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   border: 2px solid #000000;
   font-style: normal;
   font-weight: bold;
@@ -696,6 +710,7 @@
 
 .arch-env.is-prod {
   background: var(--cs-accent);
+  color: #000000;
   box-shadow: 0 0 22px var(--cs-glow);
 }
 
@@ -784,7 +799,7 @@
 .cs-tab.is-active {
   background: var(--cs-accent);
   border-color: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
   box-shadow: 0 0 18px var(--cs-glow);
 }
@@ -804,7 +819,7 @@
 
 .cs-tab.is-active .cs-tab-num {
   background: #ffffff;
-  color: var(--cs-accent-dark);
+  color: #000000;
 }
 
 .cs-tab:focus-visible,
@@ -933,7 +948,7 @@
 }
 
 .wf-edge-label text {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   fill: var(--cs-accent);
 }
@@ -955,13 +970,13 @@
 }
 
 .wf-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   fill: #000000;
 }
 
 .wf-sub {
-  font-size: 10.5px;
+  font-size: 12px;
   fill: var(--cs-text-dark);
 }
 
@@ -990,7 +1005,7 @@
 
 .wf-trigger .wf-label,
 .wf-trigger .wf-sub {
-  fill: #ffffff;
+  fill: #000000;
 }
 
 .wf-trigger .wf-badge-bg {
@@ -1203,7 +1218,7 @@
   height: 22px;
   border-radius: 50%;
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   border: 2px solid #000000;
   font-style: normal;
   font-weight: bold;
@@ -1291,7 +1306,7 @@
   align-items: center;
   gap: 7px;
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   border: 2px solid var(--cs-accent);
   border-radius: 5px;
   padding: 7px 12px;
@@ -1353,6 +1368,7 @@
   margin-bottom: 10px;
 }
 
+.cs-card h3,
 .cs-card h4 {
   color: #000000;
   font-size: 1.02em;
@@ -1367,7 +1383,7 @@
 
 .cs-metric {
   margin-top: 8px !important;
-  color: var(--cs-accent-dark) !important;
+  color: #000000 !important; /* orange on a white card fails WCAG AA */
   font-weight: bold;
   font-size: 1.1em !important;
 }
@@ -1381,7 +1397,7 @@
 
 .cs-tag {
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
   border-radius: 5px;
   padding: 4px 8px;
   font-size: 12px;
@@ -1470,7 +1486,7 @@
 
 .cs-mini-flow li:last-child {
   background: var(--cs-accent);
-  color: #ffffff;
+  color: #000000;
 }
 
 .cs-points {
@@ -1498,12 +1514,403 @@
   background: var(--cs-accent);
 }
 
-.cs-cards-3 {
-  margin-bottom: 16px !important;
-}
-
 @media (min-width: 900px) {
   .cs-cards.cs-cards-3 {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* ---------- Home page: featured project card ---------- */
+.cs-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--cs-s3);
+  padding: var(--cs-s5) 20px;
+  border: 2px solid var(--cs-accent);
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(228, 163, 78, 0.2), transparent 65%),
+    var(--cs-well);
+  box-shadow: 0 0 26px rgba(228, 163, 78, 0.2);
+  transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+/* The card never moves under the pointer (a lifting card flickers at its edge);
+   it answers with a stronger glow and the arrow sliding forward. */
+.cs-feature:hover,
+.cs-feature:focus-within {
+  background-color: rgba(228, 163, 78, 0.08);
+  box-shadow: 0 0 0 2px var(--cs-accent), 0 0 34px rgba(228, 163, 78, 0.55);
+}
+
+.cs-feature h3 {
+  color: #ffffff;
+  font-size: clamp(1.25em, 3vw, 1.7em);
+  line-height: 1.25;
+  max-width: 28em;
+}
+
+.cs-feature h3 span {
+  color: var(--cs-accent);
+}
+
+.cs-section .cs-feature-text {
+  max-width: 60ch;
+  margin: 0;
+}
+
+.cs-feature .cs-tags {
+  margin-top: 0 !important;
+}
+
+.cs-feature-link {
+  margin-top: var(--cs-s2);
+  font-size: 1.05em;
+  padding: 13px 24px;
+  animation: cs-ai-glow 3s ease-in-out infinite;
+}
+
+/* The button must never get a transform: a transformed link becomes the containing
+   block of its own ::after, so the card-wide click area would shrink to the button,
+   drop the hover, grow back and flicker. Specificity beats `.pf-btn:hover`. */
+.cs-feature .cs-feature-link,
+.cs-feature .cs-feature-link:hover {
+  transform: none;
+}
+
+.cs-feature-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.cs-feature:hover .cs-feature-arrow {
+  transform: translateX(5px);
+}
+
+/* teaser of what the system does; desktop only, phones keep the card short */
+.cs-feature .cs-pipe {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .cs-feature .cs-pipe {
+    display: flex;
+    align-self: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: var(--cs-s3);
+    margin-top: var(--cs-s2) !important;
+  }
+}
+
+/* stretches the link over the whole card */
+.cs-feature-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+}
+
+.cs-subheading {
+  margin-top: 40px;
+}
+
+@media (min-width: 769px) {
+  .cs-feature {
+    padding: var(--cs-s6);
+  }
+}
+
+/* ---------- Project page: solid panels, more air ---------- */
+.cs-page {
+  padding: var(--cs-s5) 0 var(--cs-s6);
+}
+
+/* Near-solid panels: text never sits on the moving background. */
+.cs-page .cs-section {
+  --cs-panel: rgba(0, 0, 0, 0.92);
+  max-width: 1160px;
+  margin: var(--cs-s5) auto;
+  padding: var(--cs-s6) var(--cs-s4);
+}
+
+.cs-page-nav {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 32px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.cs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cs-s2);
+  font-weight: bold;
+  font-size: 0.95em;
+  text-decoration: none;
+  color: var(--cs-text-light);
+  background: rgba(0, 0, 0, 0.92);
+  border: 2px solid var(--cs-accent);
+  border-radius: 5px;
+  padding: 10px 18px;
+  transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.cs-back:hover {
+  color: #ffffff;
+  background: #000000;
+  box-shadow: 0 6px 18px var(--cs-glow);
+}
+
+.cs-back:focus-visible,
+.cs-details summary:focus-visible {
+  outline: 2px solid var(--cs-accent);
+  outline-offset: 3px;
+}
+
+/* vertical rhythm inside a panel */
+.cs-page .cs-block > * + * {
+  margin-top: var(--cs-s6);
+}
+
+.cs-page .cs-block > p {
+  margin-bottom: 0;
+  max-width: var(--cs-measure);
+  line-height: 1.6;
+}
+
+.cs-page .cs-block-title {
+  margin-bottom: 0;
+}
+
+.cs-page .cs-block > .cs-takeaway {
+  margin-top: var(--cs-s3);
+  font-size: 1.15em;
+  font-weight: bold;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.cs-page .cs-block > .cs-takeaway + .cs-lead {
+  margin-top: var(--cs-s4);
+}
+
+.cs-page .cs-block > .cs-lead + .cs-lead {
+  margin-top: var(--cs-s3);
+}
+
+.cs-page .cs-caption,
+.cs-page .cs-tabpanel > .cs-lead {
+  max-width: var(--cs-measure);
+  line-height: 1.6;
+}
+
+.cs-page .cs-tabpanel > * + * {
+  margin-top: var(--cs-s5);
+}
+
+.cs-page .cs-tablist {
+  margin-top: var(--cs-s6);
+  margin-bottom: var(--cs-s3);
+}
+
+.cs-page .cs-pipe {
+  margin-top: var(--cs-s6) !important;
+}
+
+/* hero */
+.cs-key-tech {
+  justify-content: center;
+  gap: var(--cs-s2);
+  margin-top: var(--cs-s5) !important;
+}
+
+.cs-key-tech .cs-tag {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 12px;
+}
+
+.cs-page .cs-facts {
+  gap: var(--cs-s3);
+  margin-top: var(--cs-s6);
+}
+
+/* roomier cards and diagrams */
+.cs-page .cs-cards {
+  gap: var(--cs-s4);
+}
+
+.cs-page .cs-card {
+  padding: var(--cs-s5) 20px;
+}
+
+.cs-page .cs-card p {
+  font-size: 0.95em !important;
+  line-height: 1.55;
+}
+
+.cs-page .cs-ba {
+  gap: var(--cs-s4);
+}
+
+.cs-page .cs-ba-col {
+  padding: 20px var(--cs-s5);
+}
+
+.cs-page .cs-ba-col li {
+  margin: 10px 0;
+  font-size: 1em;
+}
+
+.cs-page .arch-flow {
+  gap: var(--cs-s4);
+}
+
+.cs-page .arch-col,
+.cs-page .arch-deploy {
+  padding: var(--cs-s4);
+}
+
+.cs-page .arch-list,
+.cs-page .arch-grid {
+  gap: var(--cs-s3);
+}
+
+.cs-page .arch-block {
+  padding: var(--cs-s3) 14px;
+}
+
+.cs-page .arch-block span,
+.cs-page .arch-env span {
+  font-size: 0.85em;
+}
+
+.cs-page .arch-deploy {
+  margin-top: var(--cs-s5);
+}
+
+.cs-page .cs-tl-text {
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.cs-page .cs-techstack {
+  gap: var(--cs-s3);
+}
+
+/* disclosure ("Show details") */
+.cs-details {
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  background: var(--cs-well);
+}
+
+.cs-details summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px var(--cs-s4);
+  font-weight: bold;
+  color: var(--cs-accent);
+  cursor: pointer;
+  list-style: none;
+  border-radius: 10px;
+}
+
+.cs-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.cs-details summary::before {
+  content: '+';
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--cs-accent);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.cs-details[open] summary::before {
+  content: '−';
+}
+
+.cs-details summary:hover {
+  color: #ffffff;
+}
+
+.cs-details-body {
+  padding: var(--cs-s2) var(--cs-s4) var(--cs-s4);
+}
+
+.cs-details .cs-notes {
+  margin-top: 0 !important;
+}
+
+.cs-details .cs-notes li {
+  font-size: 0.95em;
+  line-height: 1.5;
+  padding: var(--cs-s3) var(--cs-s4);
+}
+
+.cs-details .cs-rag {
+  border: 0;
+  padding: 0;
+  background: none;
+}
+
+/* closing panel */
+.cs-page-end {
+  text-align: center;
+}
+
+.cs-section.cs-page-end p {
+  margin-bottom: var(--cs-s5);
+}
+
+.cs-page-end-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--cs-s3);
+}
+
+@media (min-width: 769px) {
+  .cs-page {
+    padding: var(--cs-s6) 0 var(--cs-s7);
+  }
+
+  .cs-page .cs-section {
+    margin: var(--cs-s6) auto;
+    padding: var(--cs-s7);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-page .cs-section,
+  .cs-page-nav {
+    width: calc(100% - 16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-back {
+    transition: none;
+  }
+
+  .cs-feature:hover .cs-feature-arrow {
+    transform: none;
+  }
+}
+
+/* keep the shared section label at its usual size inside this panel */
+.cs-section .pf-eyebrow {
+  font-size: 0.75em;
 }

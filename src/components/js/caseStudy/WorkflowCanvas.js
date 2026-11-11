@@ -2,10 +2,12 @@ import React from 'react';
 import { useReducedMotion } from '../hooks';
 
 // Grid geometry (SVG user units)
-const COL_W = 184;
-const ROW_H = 104;
-const NODE_W = 140;
-const NODE_H = 60;
+// Sized so labels stay readable: the canvas renders close to 1:1 on desktop
+// and scrolls inside its frame on narrow screens.
+const COL_W = 196;
+const ROW_H = 112;
+const NODE_W = 152;
+const NODE_H = 64;
 const PAD_X = 30;
 const PAD_Y = 32;
 const GAP = COL_W - NODE_W;
@@ -119,7 +121,7 @@ function Node({ node, index }) {
   const { x, y } = pos(node);
   const subLines = wrap(node.sub);
   const cx = x + NODE_W / 2;
-  const labelY = subLines.length ? y + (subLines.length > 1 ? 22 : 27) : y + NODE_H / 2 + 5;
+  const labelY = subLines.length ? y + (subLines.length > 1 ? 23 : 29) : y + NODE_H / 2 + 5;
   return (
     <g className={`wf-node wf-${node.kind}`} style={{ '--i': index }}>
       <rect x={x} y={y} width={NODE_W} height={NODE_H} rx="12" className="wf-node-box" />
@@ -128,7 +130,7 @@ function Node({ node, index }) {
         {node.label}
       </text>
       {subLines.map((line, i) => (
-        <text key={i} x={cx} y={labelY + 15 + i * 12} textAnchor="middle" className="wf-sub">
+        <text key={i} x={cx} y={labelY + 16 + i * 13} textAnchor="middle" className="wf-sub">
           {line}
         </text>
       ))}
@@ -137,11 +139,11 @@ function Node({ node, index }) {
 }
 
 function EdgeLabel({ x, y, text }) {
-  const w = text.length * 6.2 + 12;
+  const w = text.length * 6.8 + 14;
   return (
     <g className="wf-edge-label">
-      <rect x={x - w / 2} y={y - 8} width={w} height="16" rx="8" />
-      <text x={x} y={y + 3.5} textAnchor="middle">
+      <rect x={x - w / 2} y={y - 9} width={w} height="18" rx="9" />
+      <text x={x} y={y + 4} textAnchor="middle">
         {text}
       </text>
     </g>
@@ -189,7 +191,7 @@ function WorkflowCanvas({ workflow, visible }) {
           <svg
             className="wf-svg"
             viewBox={`0 0 ${width} ${height}`}
-            style={{ minWidth: Math.round(width * 0.72) }}
+            style={{ minWidth: Math.round(width * 0.85) }}
             role="img"
             aria-labelledby={`${titleId} ${descId}`}
           >

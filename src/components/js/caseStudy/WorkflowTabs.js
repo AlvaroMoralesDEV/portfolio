@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import WorkflowCanvas from './WorkflowCanvas';
+import { Details } from './CaseStudyParts';
 import { useInView } from '../hooks';
 
 // Accessible tabs (WAI-ARIA tabs pattern, automatic activation).
@@ -51,11 +52,14 @@ function WorkflowTabs({ workflows }) {
         <p className="cs-lead">{wf.summary}</p>
         {/* key forces a remount so the entrance animation replays on tab change */}
         <WorkflowCanvas key={wf.id} workflow={wf} visible={visible} />
-        <ul className="cs-notes">
-          {wf.notes.map((n) => (
-            <li key={n}>{n}</li>
-          ))}
-        </ul>
+        {/* key resets the disclosure to closed when the tab changes */}
+        <Details key={`notes-${wf.id}`} label="Show implementation details">
+          <ul className="cs-notes">
+            {wf.notes.map((n) => (
+              <li key={n}>{n}</li>
+            ))}
+          </ul>
+        </Details>
       </div>
     </div>
   );

@@ -21,22 +21,22 @@ const Icon = ({ name }) => (
   </svg>
 );
 
-export function Hero({ client, pipeline, facts }) {
+export function Hero({ client, summary, keyTech, facts }) {
   return (
     <header className="cs-header">
-      <p className="cs-eyebrow">Featured Project · Delivered at Chakray</p>
-      <h2 id="cs-title">
+      <p className="cs-eyebrow">Case study · Delivered at Chakray</p>
+      <h1 id="cs-title" tabIndex={-1}>
         NOC Automation for <span>{client}</span>
-      </h2>
-      <p className="cs-sub">Built with n8n and AI agents. Running in production, delivered side by side with the client.</p>
+      </h1>
+      <p className="cs-sub">{summary}</p>
 
-      <ol className="cs-pipe" aria-label="What the system does, step by step">
-        {pipeline.map((p, i) => (
-          <li key={p} style={{ '--i': i }}>
-            {p}
+      <ul className="cs-tags cs-key-tech" aria-label="Key technologies">
+        {keyTech.map((t) => (
+          <li key={t} className="cs-tag">
+            {t}
           </li>
         ))}
-      </ol>
+      </ul>
 
       <dl className="cs-facts">
         {facts.map((f) => (
@@ -51,12 +51,34 @@ export function Hero({ client, pipeline, facts }) {
   );
 }
 
+export function Pipeline({ steps }) {
+  return (
+    <ol className="cs-pipe" aria-label="What the system does, step by step">
+      {steps.map((p, i) => (
+        <li key={p} style={{ '--i': i }}>
+          {p}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** Native disclosure: the key point stays visible, the detail is one click away. */
+export function Details({ label, children }) {
+  return (
+    <details className="cs-details">
+      <summary>{label}</summary>
+      <div className="cs-details-body">{children}</div>
+    </details>
+  );
+}
+
 export function BeforeAfter({ before, after }) {
   const [ref, visible] = useInView();
   return (
     <div ref={ref} className={`cs-ba cs-reveal ${visible ? 'is-visible' : ''}`}>
       <div className="cs-ba-col is-before">
-        <h4>Before</h4>
+        <h3>Before</h3>
         <ul>
           {before.map((b) => (
             <li key={b}>{b}</li>
@@ -65,7 +87,7 @@ export function BeforeAfter({ before, after }) {
       </div>
       <span className="cs-ba-arrow" aria-hidden="true" />
       <div className="cs-ba-col is-after">
-        <h4>After</h4>
+        <h3>After</h3>
         <ul>
           {after.map((a) => (
             <li key={a}>{a}</li>
@@ -99,7 +121,7 @@ export function RagFlow({ groups }) {
     <figure ref={ref} className={`cs-rag cs-reveal ${visible ? 'is-visible' : ''}`} aria-labelledby="rag-caption">
       {groups.map((g, gi) => (
         <div key={g.title} className="cs-rag-group">
-          <h4 className="cs-rag-title">{g.title}</h4>
+          <h3 className="cs-rag-title">{g.title}</h3>
           <ol className="cs-rag-steps">
             {g.steps.map((s, i) => (
               <li
@@ -141,7 +163,7 @@ export function AiLayers({ items }) {
       {items.map((c) => (
         <li key={c.title} className="cs-card">
           <Icon name={c.icon} />
-          <h4>{c.title}</h4>
+          <h3>{c.title}</h3>
           <p>{c.text}</p>
         </li>
       ))}
@@ -151,11 +173,11 @@ export function AiLayers({ items }) {
 
 export function ImpactCards({ items }) {
   return (
-    <ul className="cs-cards">
+    <ul className="cs-cards cs-cards-2">
       {items.map((c) => (
         <li key={c.title} className="cs-card">
           <Icon name={c.icon} />
-          <h4>{c.title}</h4>
+          <h3>{c.title}</h3>
           <p>{c.text}</p>
           {/* TODO: metric — set `metric` in caseStudyData.js once a real number is available */}
           {c.metric && <p className="cs-metric">{c.metric}</p>}

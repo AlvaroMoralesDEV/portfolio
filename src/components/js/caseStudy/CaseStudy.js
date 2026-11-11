@@ -1,7 +1,17 @@
 import React from 'react';
 import ArchitectureDiagram from './ArchitectureDiagram';
 import WorkflowTabs from './WorkflowTabs';
-import { AiLayers, BeforeAfter, Hero, ImpactCards, OtherProjects, RagFlow, TechStack, Timeline } from './CaseStudyParts';
+import {
+  AiLayers,
+  BeforeAfter,
+  Details,
+  Hero,
+  ImpactCards,
+  Pipeline,
+  RagFlow,
+  TechStack,
+  Timeline,
+} from './CaseStudyParts';
 import {
   CLIENT,
   aiIntro,
@@ -9,72 +19,78 @@ import {
   beforeAfter,
   facts,
   impact,
-  otherProjects,
+  keyTech,
   pipeline,
   problem,
   ragSteps,
+  summary,
+  takeaways,
   techStack,
   timeline,
   workflows,
 } from './caseStudyData';
 import '../../css/CaseStudy.css';
 
-const Block = ({ num, title, children }) => (
-  <div className="cs-block">
-    <h3>
+// One idea per panel: numbered heading, one-line takeaway, then the detail.
+const Block = ({ id, num, title, takeaway, children }) => (
+  <section className="cs-section cs-block" aria-labelledby={`cs-${id}-title`}>
+    <h2 id={`cs-${id}-title`} className="cs-block-title">
       <span className="cs-num" aria-hidden="true">
         {num}
       </span>
       {title}
-    </h3>
+    </h2>
+    <p className="cs-takeaway">{takeaway}</p>
     {children}
-  </div>
+  </section>
 );
 
+/** The full NOC case study, as a stack of separate panels (used by the project page). */
 function CaseStudy() {
   return (
-    <section className="cs-section" aria-labelledby="cs-title">
-      <Hero client={CLIENT} pipeline={pipeline} facts={facts} />
+    <>
+      <section className="cs-section" aria-labelledby="cs-title">
+        <Hero client={CLIENT} summary={summary} keyTech={keyTech} facts={facts} />
+      </section>
 
-      <Block num="01" title="The problem">
+      <Block id="problem" num="01" title="The problem" takeaway={takeaways.problem}>
         {problem.map((p) => (
           <p key={p} className="cs-lead">
             {p}
           </p>
         ))}
-        <BeforeAfter before={beforeAfter.before} after={beforeAfter.after} />
       </Block>
 
-      <Block num="02" title="How I worked with the client">
+      <Block id="process" num="02" title="How I worked with the client" takeaway={takeaways.process}>
         <Timeline steps={timeline} />
       </Block>
 
-      <Block num="03" title="Architecture">
+      <Block id="architecture" num="03" title="Architecture" takeaway={takeaways.architecture}>
+        <BeforeAfter before={beforeAfter.before} after={beforeAfter.after} />
         <ArchitectureDiagram />
       </Block>
 
-      <Block num="04" title="Key workflows">
+      <Block id="workflows" num="04" title="Key workflows" takeaway={takeaways.workflows}>
+        <Pipeline steps={pipeline} />
         <WorkflowTabs workflows={workflows} />
       </Block>
 
-      <Block num="05" title="AI agents & RAG with Qdrant">
+      <Block id="ai" num="05" title="AI agents & RAG with Qdrant" takeaway={takeaways.ai}>
         <p className="cs-lead">{aiIntro}</p>
         <AiLayers items={aiLayers} />
-        <RagFlow groups={ragSteps} />
+        <Details label="Show how indexing and retrieval work">
+          <RagFlow groups={ragSteps} />
+        </Details>
       </Block>
 
-      <Block num="06" title="Tech stack">
+      <Block id="stack" num="06" title="Tech stack" takeaway={takeaways.stack}>
         <TechStack items={techStack} />
       </Block>
 
-      <Block num="07" title="Impact & what I owned">
+      <Block id="impact" num="07" title="Impact & what I owned" takeaway={takeaways.impact}>
         <ImpactCards items={impact} />
       </Block>
-
-      <Block num="08" title="Other projects">
-        <OtherProjects items={otherProjects} />
-      </Block>
-    </section>
+    </>
   );
 }
 

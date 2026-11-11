@@ -1,11 +1,37 @@
+import pageMeta from './pageMeta.json';
+
 // Content for the "Featured Project" case study.
 // Everything here is derived from the real project but kept generic on purpose:
 // no client name, hostnames, IPs, mailboxes, table names, tool names or credentials.
 
 export const CLIENT = 'a leading European telecom infrastructure operator';
 
+// Route, browser-tab title and link-preview text of the project page. Kept in JSON so
+// scripts/postbuild-meta.js can read the same values at build time.
+export { pageMeta };
+export const NOC_PATH = pageMeta.path;
+
+// One-line summary, shared by the home page card and the project page hero.
+export const summary =
+  'Built with n8n and AI agents. Running in production, delivered side by side with the client.';
+
+// Key tech shown on the card and in the hero; the full list is `techStack`.
+// Docker, OpenShift and MySQL added at the user's request (2026-11-11).
+export const keyTech = ['n8n', 'Azure OpenAI', 'Qdrant', 'MCP', 'Docker', 'OpenShift', 'MySQL'];
+
+// One-line takeaway shown under each section heading of the project page.
+export const takeaways = {
+  problem: 'Every email to the NOC mailbox has to end up as the right action on the right ticket.',
+  process: 'Five steps with the client, from discovery to production.',
+  architecture: 'Two monolithic workflows became eight focused ones around a SQL queue.',
+  workflows: 'Four of the workflows, one tab each.',
+  ai: 'The workflows move the data; the AI makes the decisions that used to need a person reading every email.',
+  stack: 'Everything the system runs on.',
+  impact: 'Owned end to end, from discovery to production.',
+};
+
 export const problem = [
-  'The NOC mailbox takes in customer and provider emails (outages, follow-ups, resolutions), and each one has to end up as the right action on the right ticket.',
+  'The mailbox takes in customer and provider emails: outages, follow-ups and resolutions.',
   'The automation in place could not keep evolving: every change meant touching duplicated logic, and failures left no trace.',
 ];
 
@@ -189,8 +215,7 @@ export const workflows = [
 ];
 
 // How the AI was added on top of the workflow engine, in plain terms.
-export const aiIntro =
-  'The workflows move the data; the AI makes the decisions that used to need a person reading every email. I added it in three layers, each one doing a single job.';
+export const aiIntro = 'I added the AI in three layers, each one doing a single job.';
 
 export const aiLayers = [
   {
@@ -206,14 +231,14 @@ export const aiLayers = [
   {
     icon: 'db',
     title: '3 · Knowledge base in Qdrant',
-    text: 'The knowledge the agent can search. Documents are split into chunks, turned into embeddings and stored in Qdrant. The agent has the vector store as a tool: it retrieves the most relevant chunks and answers with them as context.',
+    text: 'The knowledge the agent can search. A Python script splits the documents into chunks, turns them into embeddings and stores them in Qdrant. The agent has the vector store as a tool: it retrieves the most relevant chunks and answers with them as context.',
   },
 ];
 
 // Two halves of the RAG layer: getting knowledge in, and getting it out.
 export const ragSteps = [
   {
-    title: 'Indexing · documents into Qdrant',
+    title: 'Indexing · a Python script loads documents into Qdrant',
     steps: [
       { label: 'Documents', sub: 'runbooks and resolved incidents' },
       { label: 'Split into chunks', sub: 'small pieces of text' },
@@ -222,7 +247,7 @@ export const ragSteps = [
     ],
   },
   {
-    title: 'Retrieval · the agent uses it',
+    title: 'Retrieval · the AI workflow uses it',
     steps: [
       { label: 'New email', sub: 'reaches the AI agent' },
       { label: 'Qdrant search', sub: 'the agent calls it as a tool' },
@@ -235,13 +260,13 @@ export const ragSteps = [
 export const techStack = [
   'n8n',
   'Docker',
+  'OpenShift',
   'Azure OpenAI',
   'Qdrant',
   'MCP',
   'Python',
-  'SQL Server',
+  'MySQL', // the only database listed, by the user's choice (2026-11-11)
   'Microsoft Graph',
-  'PostgreSQL',
   'Keycloak',
   'Nginx',
   'WireMock',
@@ -287,7 +312,7 @@ export const otherProjects = [
       'Requests are validated against a JSON Schema at the gateway before they reach n8n',
       'Every run is logged back to the ERP as success, warning or error, with email alerts',
     ],
-    tags: ['n8n', 'Odoo', 'Gravitee', 'REST APIs', 'WireMock', 'Jenkins', 'Docker'],
+    tags: ['n8n', 'Odoo', 'Gravitee', 'REST APIs', 'Jenkins'],
   },
   {
     title: 'Point of sale payments ↔ core banking',
@@ -310,7 +335,7 @@ export const otherProjects = [
       'Pulls from Oracle and SQL Server databases, SOAP services, SharePoint and file shares',
       'Connections are managed in Airflow, outside the code',
     ],
-    tags: ['Apache Airflow', 'OpenShift', 'Python', 'Docker', 'Oracle', 'SQL Server', 'SOAP', 'SharePoint', 'SMB'],
+    tags: ['Apache Airflow', 'OpenShift', 'Python', 'Oracle', 'SQL Server'],
   },
   {
     title: 'Internal engineering tooling',
