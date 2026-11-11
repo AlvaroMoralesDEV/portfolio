@@ -86,3 +86,37 @@ export function useActiveSection(ids) {
 
   return active;
 }
+
+const SITE_URL = 'https://alvaromoralesfc.com';
+
+/**
+ * Sets the document title and the description / Open Graph / canonical tags while a page
+ * is mounted, then restores what index.html shipped with.
+ */
+export function usePageMeta({ title, description, path }) {
+  useEffect(() => {
+    const url = `${SITE_URL}${path}`;
+    const targets = [
+      ['meta[name="description"]', 'content', description],
+      ['meta[property="og:title"]', 'content', title],
+      ['meta[property="og:description"]', 'content', description],
+      ['meta[property="og:url"]', 'content', url],
+      ['meta[name="twitter:title"]', 'content', title],
+      ['meta[name="twitter:description"]', 'content', description],
+      ['link[rel="canonical"]', 'href', url],
+    ];
+    const previousTitle = document.title;
+    document.title = title;
+    const restore = targets.map(([selector, attr, value]) => {
+      const el = document.head.querySelector(selector);
+      if (!el) return null;
+      const previous = el.getAttribute(attr);
+      el.setAttribute(attr, value);
+      return () => el.setAttribute(attr, previous);
+    });
+    return () => {
+      document.title = previousTitle;
+      restore.forEach((undo) => undo?.());
+    };
+  }, [title, description, path]);
+}

@@ -4,7 +4,7 @@
 :root {
   --pf-accent: #E4A34E;
   --pf-accent-dark: #d4a03e;
-  --pf-panel: rgba(0, 0, 0, 0.6);
+  --pf-panel: rgba(0, 0, 0, 0.85); /* near-solid: text stays readable over the animated background */
   --pf-text-light: #F0F0F0;
   --pf-text-dark: #56564E;
   --pf-card: rgba(255, 255, 255, 0.9);
@@ -105,7 +105,7 @@
   font-weight: bold;
   font-size: 0.95em;
   text-decoration: none;
-  color: #ffffff;
+  color: #000000;
   background: var(--pf-accent);
   border: 2px solid var(--pf-accent);
   border-radius: 5px;
@@ -151,7 +151,7 @@
 
 .pf-tag {
   background: var(--pf-accent);
-  color: #ffffff;
+  color: #000000;
   border-radius: 5px;
   padding: 4px 8px;
   font-size: 12px;
@@ -721,4 +721,13 @@
 .cs-section {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
+}
+
+/* The footer line gets its own small panel so it never sits on the moving icons. */
+.pf-footer p {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--pf-panel);
+  color: var(--pf-text-light);
 }

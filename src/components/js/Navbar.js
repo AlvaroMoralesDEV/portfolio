@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { scrollToSection, useActiveSection } from './hooks';
 import '../css/Navbar.css';
 
@@ -12,12 +13,18 @@ export const NAV_SECTIONS = [
 ];
 
 const SECTION_IDS = NAV_SECTIONS.map((s) => s.id);
+const NO_IDS = [];
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef(null);
   const firstLinkRef = useRef(null);
-  const active = useActiveSection(SECTION_IDS);
+  const navigate = useNavigate();
+  const onHome = useLocation().pathname === '/';
+  // Section tracking only makes sense on the home page; project pages sit under "Projects".
+  const tracked = useActiveSection(onHome ? SECTION_IDS : NO_IDS);
+  const active = onHome ? tracked : 'projects';
+  const hrefFor = (id) => (onHome ? `#${id}` : `/#${id}`);
 
   // Close the drawer on Escape and return focus to the toggle.
   useEffect(() => {
@@ -43,14 +50,15 @@ function Navbar() {
 
   const goTo = (e, id) => {
     e.preventDefault();
-    scrollToSection(id);
+    if (onHome) scrollToSection(id);
+    else navigate(`/#${id}`);
     setOpen(false);
   };
 
   return (
     <header className="nav-bar">
       <div className="nav-inner">
-        <a href="#presentation" className="nav-brand" onClick={(e) => goTo(e, 'presentation')}>
+        <a href={hrefFor('presentation')} className="nav-brand" onClick={(e) => goTo(e, 'presentation')}>
           Alvaro <span>Morales</span>
         </a>
 
@@ -74,7 +82,7 @@ function Navbar() {
               <li key={s.id}>
                 <a
                   ref={i === 0 ? firstLinkRef : undefined}
-                  href={`#${s.id}`}
+                  href={hrefFor(s.id)}
                   className={`nav-link ${active === s.id ? 'is-active' : ''}`}
                   aria-current={active === s.id ? 'true' : undefined}
                   onClick={(e) => goTo(e, s.id)}

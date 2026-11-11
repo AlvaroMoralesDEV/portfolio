@@ -1,55 +1,64 @@
 import React, { useEffect, useRef } from 'react';
-import emailIcon from '../../assets/icons/email.png';
+import { useReducedMotion } from './hooks';
 import awsIcon from '../../assets/icons/aws.png';
-import discordIcon from '../../assets/icons/discord.png';
 import mysqlIcon from '../../assets/icons/mysql.png';
-import sapIcon from '../../assets/icons/sap.png';
-import twitterIcon from '../../assets/icons/twitter.png';
 import slackIcon from '../../assets/icons/slack.png';
 import teamsIcon from '../../assets/icons/teams.png';
-import teamsSalesforce from '../../assets/icons/salesforce.png';
-import teamsPosIcon from '../../assets/icons/pos.png';
-import notionIcon from '../../assets/icons/notion.png';
 import dockerIcon from '../../assets/icons/docker.png';
 import gitIcon from '../../assets/icons/git.png';
-import dropboxIcon from '../../assets/icons/dropbox.png';
 import webhookIcon from '../../assets/icons/webhook.png';
 import kafkaIcon from '../../assets/icons/kafka.png';
 import mongoIcon from '../../assets/icons/mongo.png';
 import postgressIcon from '../../assets/icons/postgress.png';
 import apiIcon from '../../assets/icons/api.png';
 import grafanaIcon from '../../assets/icons/grafana.png';
-import shopifyIcon from '../../assets/icons/shopify.png';
 import stripeIcon from '../../assets/icons/stripe.png';
-import paypalIcon from '../../assets/icons/paypal.png';
 import azureIcon from '../../assets/icons/azure.png';
+import n8nIcon from '../../assets/icons/n8n.svg';
+import pythonIcon from '../../assets/icons/python.svg';
+import airflowIcon from '../../assets/icons/airflow.svg';
+import openshiftIcon from '../../assets/icons/openshift.svg';
+import odooIcon from '../../assets/icons/odoo.svg';
+import rabbitmqIcon from '../../assets/icons/rabbitmq.svg';
 import swaggerIcon from '../../assets/icons/swagger.png';
 import postmanIcon from '../../assets/icons/postman.png';
 import gptIcon from '../../assets/icons/gpt.png';
-import elasticsearchIcon from '../../assets/icons/elasticsearch.png';
 import redisIcon from '../../assets/icons/redis.png';
 import kuberIcon from '../../assets/icons/kuber.png';
 import confluenceIcon from '../../assets/icons/confluence.png';
-import whaIcon from '../../assets/icons/wha.png';
-import telegramIcon from '../../assets/icons/telegram.png';
-import wordpressIcon from '../../assets/icons/wordpress.png';
 
 
+// Only tools that relate to the work shown on the site.
 const icons = [
-  emailIcon, elasticsearchIcon, wordpressIcon, confluenceIcon,
-  kuberIcon, telegramIcon, redisIcon, awsIcon, whaIcon, gptIcon,
-  postmanIcon, swaggerIcon, mysqlIcon, discordIcon, twitterIcon, sapIcon,
-  slackIcon, teamsIcon, teamsSalesforce, teamsPosIcon, notionIcon,
-  dockerIcon, gitIcon, dropboxIcon, webhookIcon, kafkaIcon, mongoIcon,
-  postgressIcon, apiIcon, grafanaIcon, shopifyIcon, stripeIcon, paypalIcon, azureIcon
+  // first twelve are the ones the calm project page shows
+  n8nIcon, gptIcon, pythonIcon, dockerIcon, openshiftIcon, azureIcon,
+  mysqlIcon, postgressIcon, apiIcon, webhookIcon, gitIcon, teamsIcon,
+  airflowIcon, odooIcon, rabbitmqIcon, redisIcon, kuberIcon, awsIcon,
+  slackIcon, mongoIcon, stripeIcon, kafkaIcon, postmanIcon, swaggerIcon,
+  grafanaIcon, confluenceIcon
 ];
 
-const CanvasBackground = () => {
+// Anything with text on it. Icons hidden behind these do not react to the mouse.
+const PANEL_SELECTOR = '.pf-section, .hero-panel, .cs-section, .nav-bar, .cs-back, .pf-footer p';
+
+// Calm mode (project page): fewer icons, slower, more transparent.
+const CALM_ICON_COUNT = 12;
+const CALM_SPEED_FACTOR = 0.4;
+const CALM_OPACITY = 0.6;
+// Icons are drawn slightly see-through and a touch smaller so they frame the page instead of leading it.
+const ICON_ALPHA = 0.65;
+const ICON_SIZE = 34;
+
+const CanvasBackground = ({ calm = false }) => {
   const canvasRef = useRef(null);
+  const reducedMotion = useReducedMotion();
+  // Read inside the animation loop, so changing them never restarts it.
+  const settings = useRef({ calm, reducedMotion });
+  settings.current = { calm, reducedMotion };
   const images = useRef([]);
   const dots = useRef([]);
   const connectionDistance = 150;
-  const speed = 1; 
+  const speed = 0.7;
   const activeDotIndex = useRef(null);
   const highlightedDots = useRef(new Set());
 
@@ -68,6 +77,7 @@ const CanvasBackground = () => {
         return new Promise((resolve) => {
           const img = new Image();
           img.src = icon;
+          img.onerror = resolve; // one broken icon must not stop the whole background
           img.onload = () => {
             images.current[index] = img;
             resolve();
@@ -96,7 +106,7 @@ const CanvasBackground = () => {
           const dot = {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            radius: 40,
+            radius: ICON_SIZE,
             dx: normalized.dx,
             dy: normalized.dy,
             image: images.current[index]
@@ -145,7 +155,7 @@ const CanvasBackground = () => {
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[index].x, dots[index].y);
-          ctx.strokeStyle = highlightedDots.current.has(index) ? 'rgba(0, 160, 255, 0.8)' : 'rgba(180, 180, 180, 0.6)';
+          ctx.strokeStyle = highlightedDots.current.has(index) ? 'rgba(228, 163, 78, 0.9)' : 'rgba(180, 180, 180, 0.6)';
           ctx.lineWidth = 1;
           ctx.stroke();
         });
@@ -153,21 +163,29 @@ const CanvasBackground = () => {
     };
 
     const drawDots = () => {
+      const { calm: isCalm, reducedMotion: isStill } = settings.current;
+      // Calm mode draws only the first few icons; the rest keep their place for later.
+      const visibleDots = isCalm ? dots.current.slice(0, CALM_ICON_COUNT) : dots.current;
+      const step = isStill ? 0 : isCalm ? CALM_SPEED_FACTOR : 1;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawConnections(ctx, dots.current);
+      drawConnections(ctx, visibleDots);
 
       // Use a fixed position for drawing dots
-      dots.current.forEach((dot, index) => {
+      visibleDots.forEach((dot, index) => {
         const isConnected = highlightedDots.current.has(index);
         const isActive = activeDotIndex.current === index;
         const size = (isActive || isConnected) ? dot.radius * 1.2 : dot.radius;
 
         // Draw the dot at its current position
+        ctx.globalAlpha = isActive || isConnected ? 1 : ICON_ALPHA;
         ctx.drawImage(dot.image, dot.x - size / 2, dot.y - size / 2, size, size);
+        ctx.globalAlpha = 1;
         
         // Update dot positions based on speed and direction
-        dot.x += dot.dx;
-        dot.y += dot.dy;
+        // (step is 0 under prefers-reduced-motion: the icons are drawn but stay still)
+        dot.x += dot.dx * step;
+        dot.y += dot.dy * step;
 
         // Reverse direction on hitting canvas boundaries
         if (dot.x < 0 || dot.x > canvas.width) {
@@ -202,6 +220,9 @@ const CanvasBackground = () => {
       activeDotIndex.current = null;
       highlightedDots.current.clear();
 
+      // Over a panel the pointer belongs to the content, not to the icons behind it.
+      if (event.target instanceof Element && event.target.closest(PANEL_SELECTOR)) return;
+
       dots.current.forEach((dot, index) => {
         const distance = Math.sqrt(
           (dot.x - mouseX) ** 2 + (dot.y - mouseY) ** 2
@@ -227,7 +248,10 @@ const CanvasBackground = () => {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       style={{
+        opacity: calm ? CALM_OPACITY : 1,
+        transition: reducedMotion ? 'none' : 'opacity 0.4s ease',
         position: 'fixed', // Fixed position to cover the entire viewport
         top: 0,
         left: 0,

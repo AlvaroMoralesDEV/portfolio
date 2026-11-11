@@ -11,7 +11,7 @@ function ArchitectureDiagram() {
     <figure ref={ref} className={`arch cs-reveal ${visible ? 'is-visible' : ''}`} aria-labelledby="arch-caption">
       <div className="arch-flow">
         <div className="arch-col">
-          <h4 className="arch-col-title">Sources</h4>
+          <h3 className="arch-col-title">Sources</h3>
           <ul className="arch-list">
             <li className="arch-block">
               <strong>NOC mailbox</strong>
@@ -23,7 +23,7 @@ function ArchitectureDiagram() {
         <Connector />
 
         <div className="arch-col arch-core">
-          <h4 className="arch-col-title">n8n orchestration</h4>
+          <h3 className="arch-col-title">n8n orchestration</h3>
           <ol className="arch-grid">
             <li className="arch-block">
               <em aria-hidden="true">1</em>
@@ -57,7 +57,7 @@ function ArchitectureDiagram() {
         <Connector />
 
         <div className="arch-col">
-          <h4 className="arch-col-title">Integrations</h4>
+          <h3 className="arch-col-title">Integrations</h3>
           <ul className="arch-list">
             <li className="arch-block">
               <strong>ITSM platform</strong>
