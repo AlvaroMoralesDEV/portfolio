@@ -7,7 +7,9 @@ import {
   Details,
   Hero,
   ImpactCards,
+  NextSteps,
   Pipeline,
+  ProblemFlow,
   RagFlow,
   TechStack,
   Timeline,
@@ -20,8 +22,12 @@ import {
   facts,
   impact,
   keyTech,
+  nextSteps,
+  nextTeaser,
   pipeline,
   problem,
+  problemFlow,
+  problemRole,
   ragSteps,
   summary,
   takeaways,
@@ -32,9 +38,9 @@ import {
 import '../../css/CaseStudy.css';
 
 // One idea per panel: numbered heading, one-line takeaway, then the detail.
-const Block = ({ id, num, title, takeaway, children }) => (
-  <section className="cs-section cs-block" aria-labelledby={`cs-${id}-title`}>
-    <h2 id={`cs-${id}-title`} className="cs-block-title">
+const Block = ({ id, num, title, takeaway, center, children }) => (
+  <section className={`cs-section cs-block ${center ? 'cs-block-center' : ''}`} aria-labelledby={`cs-${id}-title`}>
+    <h2 id={`cs-${id}-title`} className="cs-block-title" tabIndex={-1}>
       <span className="cs-num" aria-hidden="true">
         {num}
       </span>
@@ -50,15 +56,20 @@ function CaseStudy() {
   return (
     <>
       <section className="cs-section" aria-labelledby="cs-title">
-        <Hero client={CLIENT} summary={summary} keyTech={keyTech} facts={facts} />
+        <Hero client={CLIENT} summary={summary} keyTech={keyTech} facts={facts} nextTeaser={nextTeaser} />
       </section>
 
-      <Block id="problem" num="01" title="The problem" takeaway={takeaways.problem}>
+      <Block id="problem" num="01" title="The problem" takeaway={takeaways.problem} center>
         {problem.map((p) => (
           <p key={p} className="cs-lead">
             {p}
           </p>
         ))}
+        <ProblemFlow flow={problemFlow} />
+        <p className="cs-lead cs-prob-role">
+          <strong>{problemRole.label}</strong>
+          {problemRole.text}
+        </p>
       </Block>
 
       <Block id="process" num="02" title="How I worked with the client" takeaway={takeaways.process}>
@@ -89,6 +100,10 @@ function CaseStudy() {
 
       <Block id="impact" num="07" title="Impact & what I owned" takeaway={takeaways.impact}>
         <ImpactCards items={impact} />
+      </Block>
+
+      <Block id="next" num="08" title="Improvements for next phases" takeaway={takeaways.next}>
+        <NextSteps items={nextSteps} />
       </Block>
     </>
   );

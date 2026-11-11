@@ -1,5 +1,5 @@
 import React from 'react';
-import { useInView } from '../hooks';
+import { scrollToSection, useInView } from '../hooks';
 
 // 24×24 line icons, drawn with the accent colour.
 const ICONS = {
@@ -13,6 +13,12 @@ const ICONS = {
   sort: 'M4 6h16 M7 12h10 M10 18h4',
   db: 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3',
   tool: 'M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 1-2-2z M4 4l4 4 M3 8l5-5',
+  trace: 'M3 12h4l3-7 4 14 3-7h4',
+  mail: 'M3 6h18v12H3z M3 7l9 6 9-6',
+  inbox: 'M3 13l3-8h12l3 8v6H3z M3 13h5l1 3h6l1-3h5',
+  done: 'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0 M8 12l3 3 5-6',
+  graph:
+    'M4 6a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M16 8a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M9 18a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M8 6.3l8 1.4 M6.8 7.9l3.4 8.2 M16.8 9.6l-4.6 6.8',
 };
 
 const Icon = ({ name }) => (
@@ -21,7 +27,7 @@ const Icon = ({ name }) => (
   </svg>
 );
 
-export function Hero({ client, summary, keyTech, facts }) {
+export function Hero({ client, summary, keyTech, facts, nextTeaser }) {
   return (
     <header className="cs-header">
       <p className="cs-eyebrow">Case study · Delivered at Chakray</p>
@@ -38,6 +44,19 @@ export function Hero({ client, summary, keyTech, facts }) {
         ))}
       </ul>
 
+      <p className="cs-hero-next">
+        <span className="cs-hero-next-label">Next phases</span>
+        <a
+          href="#cs-next-title"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('cs-next-title');
+          }}
+        >
+          {nextTeaser} <span aria-hidden="true">↓</span>
+        </a>
+      </p>
+
       <dl className="cs-facts">
         {facts.map((f) => (
           <div key={f.label} className="cs-fact">
@@ -50,6 +69,89 @@ export function Hero({ client, summary, keyTech, facts }) {
     </header>
   );
 }
+
+/** Panel 01: emails → NOC mailbox → the right action on the right ticket. */
+export function ProblemFlow({ flow }) {
+  const [ref, visible] = useInView();
+  return (
+    <ol ref={ref} className={`cs-prob cs-reveal ${visible ? 'is-visible' : ''}`} aria-label={flow.alt}>
+      {flow.steps.map((s, i) => (
+        <li key={s.label} className={`cs-prob-step ${s.hub ? 'is-hub' : ''}`} style={{ '--i': i }}>
+          <span className="cs-prob-badge">
+            <svg className="cs-prob-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d={ICONS[s.icon]} />
+            </svg>
+          </span>
+          <span className="cs-prob-label">{s.label}</span>
+          <span className="cs-prob-sub">{s.sub}</span>
+          {i < flow.steps.length - 1 && <span className="cs-prob-link" aria-hidden="true" />}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+const MiniDoc = () => (
+  <span className="cs-mini-doc">
+    <i />
+    <i />
+    <i />
+    <i />
+  </span>
+);
+
+// Small looping diagrams for the three AI layer cards. CSS only.
+const MiniVisual = ({ visual }) => {
+  if (visual.type === 'record') {
+    return (
+      <div className="cs-mini" role="img" aria-label={visual.alt}>
+        <span className="cs-mini-item">
+          <MiniDoc />
+          {visual.source}
+        </span>
+        <span className="cs-mini-link" />
+        <span className="cs-mini-fields">
+          {visual.fields.map((f, i) => (
+            <span key={f} className="cs-mini-field" style={{ '--s': i }}>
+              {f}
+            </span>
+          ))}
+        </span>
+      </div>
+    );
+  }
+  if (visual.type === 'tool') {
+    return (
+      <div className="cs-mini" role="img" aria-label={visual.alt}>
+        {visual.steps.map((s, i) => (
+          <React.Fragment key={s}>
+            {i > 0 && <span className="cs-mini-link is-back" />}
+            <span className={`cs-mini-pill ${i === 0 ? 'is-solid' : ''}`}>{s}</span>
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div className="cs-mini" role="img" aria-label={visual.alt}>
+      <span className="cs-mini-item">
+        <MiniDoc />
+        {visual.source}
+      </span>
+      <span className="cs-mini-link" />
+      <span className="cs-mini-item">
+        <span className="cs-mini-chunks">
+          {[0, 1, 2, 3, 4, 5].map((n) => (
+            <i key={n} style={{ '--s': n }} />
+          ))}
+        </span>
+        {visual.mid}
+      </span>
+      <span className="cs-mini-link" />
+      <span className="cs-mini-pill is-solid">{visual.target}</span>
+    </div>
+  );
+};
 
 export function Pipeline({ steps }) {
   return (
@@ -162,9 +264,89 @@ export function AiLayers({ items }) {
     <ul className="cs-cards cs-cards-3">
       {items.map((c) => (
         <li key={c.title} className="cs-card">
+          {c.visual && <MiniVisual visual={c.visual} />}
           <Icon name={c.icon} />
           <h3>{c.title}</h3>
           <p>{c.text}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// Illustrative trace: one bar per span, nested by level. Animated in CSS only.
+const TraceVisual = ({ visual }) => (
+  <div className="cs-next-visual cs-next-trace" role="img" aria-label={visual.alt}>
+    {visual.spans.map((s, i) => (
+      <div key={s.label} className="cs-next-span">
+        <span className="cs-next-span-label">{s.label}</span>
+        <span className="cs-next-track">
+          <span
+            className={`cs-next-bar is-l${s.level}`}
+            style={{ left: `${s.left}%`, width: `${s.width}%`, '--s': i }}
+          />
+        </span>
+      </div>
+    ))}
+    <span className="cs-next-playhead" aria-hidden="true" />
+  </div>
+);
+
+// Illustrative knowledge graph. The "hot" path is the one the agent follows.
+const GraphVisual = ({ visual }) => {
+  const byId = Object.fromEntries(visual.nodes.map((n) => [n.id, n]));
+  return (
+    <div className="cs-next-visual cs-next-graph">
+      <svg viewBox="0 0 300 150" role="img" aria-label={visual.alt}>
+        {visual.edges.map(([from, to, kind]) => (
+          <line
+            key={`${from}-${to}`}
+            className={`cs-next-edge is-${kind}`}
+            x1={byId[from].x}
+            y1={byId[from].y}
+            x2={byId[to].x}
+            y2={byId[to].y}
+          />
+        ))}
+        {visual.nodes.map((n, i) => (
+          <g key={n.id} className="cs-next-node">
+            <circle className="cs-next-halo" cx={n.x} cy={n.y} r="15" style={{ '--h': i }} />
+            <circle className="cs-next-dot" cx={n.x} cy={n.y} r="8" />
+            <text x={n.x} y={n.y + 24} textAnchor="middle">
+              {n.label}
+            </text>
+          </g>
+        ))}
+        <g className="cs-next-legend" aria-hidden="true">
+          <line className="cs-next-edge is-vector" x1="34" y1="138" x2="58" y2="138" />
+          <text x="64" y="141.5">{visual.legend.vector}</text>
+          <line className="cs-next-edge is-graph" x1="168" y1="138" x2="192" y2="138" />
+          <text x="198" y="141.5">{visual.legend.graph}</text>
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+export function NextSteps({ items }) {
+  const [ref, visible] = useInView();
+  return (
+    <ul ref={ref} className={`cs-cards cs-cards-2 cs-reveal ${visible ? 'is-visible' : ''}`}>
+      {items.map((c, i) => (
+        <li key={c.title} className="cs-card cs-next-card" style={{ '--i': i }}>
+          {c.visual.type === 'trace' ? <TraceVisual visual={c.visual} /> : <GraphVisual visual={c.visual} />}
+          <div className="cs-next-head">
+            <Icon name={c.icon} />
+            <div>
+              <span className="cs-next-tag">{c.tag}</span>
+              <h3>{c.title}</h3>
+            </div>
+          </div>
+          <p>{c.text}</p>
+          <div className="cs-next-why">
+            <strong>Why</strong>
+            <p>{c.why}</p>
+          </div>
         </li>
       ))}
     </ul>

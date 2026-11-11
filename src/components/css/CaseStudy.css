@@ -211,9 +211,21 @@
   margin-top: 2px;
 }
 
+/* an odd last fact fills the row on phones */
+.cs-fact:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* one equal column per fact, however many there are */
 @media (min-width: 769px) {
   .cs-facts {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+
+  .cs-fact:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 }
 
@@ -1913,4 +1925,677 @@
 /* keep the shared section label at its usual size inside this panel */
 .cs-section .pf-eyebrow {
   font-size: 0.75em;
+}
+
+/* ---------- Improvements for next phases (block 08) ---------- */
+.cs-next-card {
+  gap: 0;
+}
+
+/* Side by side, both cards share the same four rows (diagram, heading, text, why),
+   so each part starts at the same height in both. Falls back to the flex column. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 600px) {
+    .cs-next-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+
+    .cs-next-card .cs-next-why {
+      align-self: start;
+      margin-top: 0;
+    }
+  }
+}
+
+.cs-reveal.is-visible .cs-next-card {
+  animation: cs-rise 0.5s ease backwards; /* backwards so the card hover still works */
+  animation-delay: calc(var(--i) * 160ms);
+}
+
+/* dark well that holds the diagram */
+.cs-next-visual {
+  position: relative;
+  height: 168px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: var(--cs-s4);
+  padding: 14px;
+  background: var(--cs-panel);
+  border-radius: 8px;
+  box-shadow: inset 0 0 22px rgba(228, 163, 78, 0.18);
+  overflow: hidden;
+}
+
+.cs-next-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cs-next-head .cs-icon {
+  flex: none;
+  margin-bottom: 0;
+}
+
+.cs-next-head h3 {
+  margin-bottom: 0;
+}
+
+.cs-next-tag {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--cs-accent);
+  border-radius: 999px;
+  background: rgba(228, 163, 78, 0.2);
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cs-next-why {
+  margin-top: auto;
+  padding: 2px 0 2px 12px;
+  border-left: 3px solid var(--cs-accent);
+}
+
+.cs-next-card > p {
+  margin-bottom: var(--cs-s4);
+}
+
+.cs-next-why strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #000000;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* trace: label + track per span */
+.cs-next-span {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.cs-next-span-label {
+  color: var(--cs-text-light);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.cs-next-track {
+  position: relative;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--cs-line);
+}
+
+.cs-next-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+  transform-origin: left center;
+}
+
+.cs-next-bar.is-l0 {
+  border: 1px solid var(--cs-accent);
+}
+
+.cs-next-bar.is-l1 {
+  background: var(--cs-accent);
+}
+
+.cs-next-bar.is-l2 {
+  background: var(--cs-accent-soft);
+  border: 1px solid var(--cs-accent);
+}
+
+.cs-reveal.is-visible .cs-next-bar {
+  animation: cs-next-grow 0.6s ease backwards;
+  animation-delay: calc(350ms + var(--s) * 140ms);
+}
+
+@keyframes cs-next-grow {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+}
+
+/* line sweeping across the tracks; hidden when nothing moves */
+.cs-next-playhead {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 128px;
+  width: 2px;
+  background: var(--cs-text-light);
+  box-shadow: 0 0 8px var(--cs-accent);
+  opacity: 0;
+}
+
+.cs-reveal.is-visible .cs-next-playhead {
+  animation: cs-next-sweep 4s linear 1.4s infinite;
+}
+
+@keyframes cs-next-sweep {
+  0% {
+    left: 128px;
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    left: calc(100% - 14px);
+    opacity: 0;
+  }
+}
+
+/* knowledge graph */
+.cs-next-graph {
+  padding: 6px;
+}
+
+.cs-next-graph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cs-next-edge {
+  stroke: rgba(240, 240, 240, 0.3);
+  stroke-width: 1.5;
+}
+
+.cs-next-edge.is-graph {
+  stroke: var(--cs-accent);
+  stroke-width: 2;
+}
+
+.cs-next-edge.is-vector {
+  stroke: var(--cs-text-light);
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+  animation: cs-next-dash 0.9s linear infinite;
+}
+
+@keyframes cs-next-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.cs-next-dot {
+  fill: var(--cs-accent);
+}
+
+.cs-next-legend text {
+  fill: var(--cs-text-light);
+  font-size: 10px;
+}
+
+.cs-next-node text {
+  fill: var(--cs-text-light);
+  font-size: 11px;
+}
+
+.cs-next-halo {
+  fill: var(--cs-accent);
+  opacity: 0;
+  animation: cs-next-halo 3.2s ease-out infinite;
+  animation-delay: calc(var(--h) * 0.6s);
+}
+
+@keyframes cs-next-halo {
+  0%,
+  45%,
+  100% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-next-span {
+    grid-template-columns: 96px 1fr;
+  }
+
+  .cs-next-playhead {
+    left: 120px;
+  }
+
+  @keyframes cs-next-sweep-sm {
+    0% {
+      left: 120px;
+      opacity: 0;
+    }
+    8%,
+    92% {
+      opacity: 0.85;
+    }
+    100% {
+      left: calc(100% - 14px);
+      opacity: 0;
+    }
+  }
+
+  .cs-reveal.is-visible .cs-next-playhead {
+    animation-name: cs-next-sweep-sm;
+  }
+}
+
+/* ---------- Hero: link down to the next phases ---------- */
+.cs-hero-next {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 10px;
+  margin: var(--cs-s4) 0 0 !important;
+  font-size: 0.92em !important;
+}
+
+.cs-hero-next-label {
+  padding: 2px 9px;
+  border: 1px solid var(--cs-accent);
+  border-radius: 999px;
+  color: var(--cs-accent);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cs-hero-next a {
+  color: var(--cs-text-light);
+  text-decoration: underline;
+  text-decoration-color: var(--cs-accent);
+  text-underline-offset: 4px;
+}
+
+.cs-hero-next a:hover {
+  color: var(--cs-accent);
+}
+
+.cs-hero-next a:focus-visible {
+  outline: 2px solid var(--cs-accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* headings only take focus from the hero link, so no ring */
+.cs-block-title:focus {
+  outline: none;
+}
+
+/* ---------- Panel 01: centred text and a three-step flow ---------- */
+.cs-block-center .cs-block-title {
+  justify-content: center;
+}
+
+/* a second rule line on the left so the centred heading stays balanced */
+.cs-block-center .cs-block-title::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(270deg, var(--cs-accent-soft), transparent);
+}
+
+.cs-page .cs-block-center > .cs-takeaway,
+.cs-page .cs-block-center > .cs-lead {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.cs-prob {
+  display: grid;
+  gap: 18px;
+  max-width: 300px;
+  margin: var(--cs-s6) auto 0 !important;
+}
+
+.cs-prob-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: 14px;
+  align-items: center;
+  text-align: left;
+}
+
+.cs-reveal.is-visible .cs-prob-step {
+  animation: cs-rise 0.45s ease backwards;
+  animation-delay: calc(var(--i) * 150ms);
+}
+
+.cs-prob-badge {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--cs-accent);
+  border-radius: 50%;
+  background: rgba(228, 163, 78, 0.14);
+}
+
+.cs-prob-icon {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--cs-accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* the mailbox is the centre of the picture */
+.cs-prob-step.is-hub .cs-prob-badge {
+  background: var(--cs-accent);
+  animation: cs-ai-glow 3s ease-in-out infinite;
+}
+
+.cs-prob-step.is-hub .cs-prob-icon {
+  stroke: #000000;
+}
+
+.cs-prob-label {
+  align-self: end;
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.cs-prob-sub {
+  align-self: start;
+  font-size: 0.85em;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+/* phones: the steps stack, so the connector runs down between the badges */
+.cs-prob-step .cs-prob-link {
+  position: absolute;
+  left: 27px;
+  top: 60px;
+  width: 2px;
+  height: calc(100% - 46px);
+}
+
+.cs-prob-step .cs-prob-link::before {
+  display: none;
+}
+
+.cs-prob-step .cs-prob-link::after {
+  top: 0;
+  left: -3px;
+  animation-name: cs-prob-dot-y;
+}
+
+@keyframes cs-prob-dot-y {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 8px);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .cs-prob {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 780px;
+  }
+
+  .cs-prob-step {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-content: start;
+    row-gap: 4px;
+    padding: 0 12px;
+    text-align: center;
+  }
+
+  .cs-prob-badge {
+    grid-row: auto;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 8px;
+  }
+
+  .cs-prob-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cs-prob-step .cs-prob-link {
+    left: calc(50% + 44px);
+    top: 31px;
+    width: calc(100% - 88px);
+    height: 2px;
+  }
+
+  .cs-prob-step .cs-prob-link::before {
+    display: block;
+  }
+
+  .cs-prob-step .cs-prob-link::after {
+    top: -3px;
+    left: 0;
+    animation-name: cs-mini-dot;
+  }
+}
+
+/* what I did about it, under the diagram */
+.cs-page .cs-block-center > .cs-prob-role {
+  margin-top: var(--cs-s6);
+  padding-top: var(--cs-s4);
+  border-top: 1px solid var(--cs-line);
+}
+
+.cs-prob-role strong {
+  margin-right: 6px;
+  color: var(--cs-accent);
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+}
+
+/* connector: line, arrowhead and a travelling dot */
+.cs-prob-link,
+.cs-mini-link {
+  position: relative;
+  height: 2px;
+  background: var(--cs-accent-soft);
+}
+
+.cs-prob-link::before {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -4px;
+  border-left: 7px solid var(--cs-accent);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.cs-prob-link::after,
+.cs-mini-link::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cs-accent);
+  box-shadow: 0 0 8px var(--cs-accent);
+  opacity: 0; /* hidden when nothing moves */
+  animation: cs-mini-dot 1.8s linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.45s);
+}
+
+@keyframes cs-mini-dot {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 8px);
+    opacity: 0;
+  }
+}
+
+/* ---------- Panel 05: mini diagram per AI layer ---------- */
+.cs-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 116px;
+  margin-bottom: var(--cs-s4);
+  padding: 12px;
+  background: var(--cs-panel);
+  border-radius: 8px;
+  box-shadow: inset 0 0 22px rgba(228, 163, 78, 0.18);
+  color: var(--cs-text-light);
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.cs-mini-link {
+  flex: 1 1 18px;
+  min-width: 16px;
+  max-width: 44px;
+}
+
+.cs-mini-link.is-back::after {
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+.cs-mini-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.cs-mini-pill {
+  padding: 6px 10px;
+  border: 1px solid var(--cs-accent);
+  border-radius: 6px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.cs-mini-pill.is-solid {
+  background: var(--cs-accent);
+  color: #000000;
+}
+
+.cs-mini-doc {
+  display: grid;
+  gap: 5px;
+  width: 44px;
+  padding: 8px 7px;
+  border: 1px solid rgba(240, 240, 240, 0.5);
+  border-radius: 4px;
+}
+
+.cs-mini-doc i {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(240, 240, 240, 0.5);
+}
+
+.cs-mini-doc i:last-child {
+  width: 60%;
+}
+
+.cs-mini-fields {
+  display: grid;
+  gap: 5px;
+}
+
+.cs-mini-field {
+  padding: 3px 9px 3px 6px;
+  border: 1px solid var(--cs-accent-soft);
+  border-radius: 4px;
+  white-space: nowrap;
+  animation: cs-mini-lit 3.6s ease-in-out infinite;
+  animation-delay: calc(0.9s + var(--s) * 0.5s);
+}
+
+.cs-mini-field::before {
+  content: '✓';
+  margin-right: 6px;
+  color: var(--cs-accent);
+  font-weight: bold;
+}
+
+@keyframes cs-mini-lit {
+  0%,
+  30%,
+  100% {
+    background: transparent;
+    border-color: var(--cs-accent-soft);
+  }
+  10% {
+    background: rgba(228, 163, 78, 0.3);
+    border-color: var(--cs-accent);
+  }
+}
+
+.cs-mini-chunks {
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  gap: 4px;
+}
+
+.cs-mini-chunks i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--cs-accent-soft);
+  animation: cs-mini-chunk 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--s) * 0.2s);
+}
+
+@keyframes cs-mini-chunk {
+  0%,
+  40%,
+  100% {
+    background: var(--cs-accent-soft);
+  }
+  15% {
+    background: var(--cs-accent);
+  }
 }

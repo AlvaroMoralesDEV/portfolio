@@ -28,12 +28,33 @@ export const takeaways = {
   ai: 'The workflows move the data; the AI makes the decisions that used to need a person reading every email.',
   stack: 'Everything the system runs on.',
   impact: 'Owned end to end, from discovery to production.',
+  next: 'Two improvements for the AI layer: see what the agents do, and retrieve better context.',
 };
 
 export const problem = [
   'The mailbox takes in customer and provider emails: outages, follow-ups and resolutions.',
   'The automation in place could not keep evolving: every change meant touching duplicated logic, and failures left no trace.',
 ];
+
+// Panel 01 diagram: three steps, the mailbox in the middle. The actions are the three
+// sub-workflows of the ITSM worker (open, follow-up, resolve).
+export const problemFlow = {
+  alt: 'What has to happen, in three steps',
+  steps: [
+    { icon: 'mail', label: 'Emails arrive', sub: 'outages · follow-ups · resolutions' },
+    { icon: 'inbox', label: 'NOC mailbox', sub: 'customers and providers', hub: true },
+    { icon: 'done', label: 'Right action, right ticket', sub: 'open · follow up · resolve' },
+  ],
+};
+
+// The user implemented the AI agents on this project (user, 2026-11-11).
+export const problemRole = {
+  label: 'My part',
+  text: 'I rebuilt the workflows and implemented the AI agents that read every email and decide what to do with it.',
+};
+
+// Hero link down to block 08.
+export const nextTeaser = 'Langfuse tracing and hybrid Graph RAG';
 
 // Short pipeline shown in the hero.
 export const pipeline = ['Email arrives', 'AI classifies', 'CMDB enriches', 'Incident handled', 'Customer answered'];
@@ -43,7 +64,6 @@ export const facts = [
   { value: '8', label: 'workflows', sub: '5 main + 3 reusable' },
   { value: '2', label: 'AI agents', sub: 'classify + enrich' },
   { value: '3', label: 'environments', sub: 'local · pre-production · production' },
-  { value: '1 min', label: 'polling cycle', sub: 'mailbox to queue' },
 ];
 
 export const beforeAfter = {
@@ -114,7 +134,7 @@ export const workflows = [
   {
     id: 'ai',
     title: 'AI classification',
-    summary: 'One agent classifies the email with a validated schema, using a Qdrant vector store as a tool to pull relevant knowledge. A second agent finds the affected circuit in the CMDB through an MCP server.',
+    summary: 'One agent classifies the email with a validated schema, using a Qdrant vector store as a tool to pull relevant knowledge. A second agent finds the affected circuit in the CMDB through an MCP server written in Python.',
     cols: 6,
     rows: 3,
     nodes: [
@@ -215,23 +235,41 @@ export const workflows = [
 ];
 
 // How the AI was added on top of the workflow engine, in plain terms.
-export const aiIntro = 'I added the AI in three layers, each one doing a single job.';
+export const aiIntro = 'I designed and implemented the AI agents in three layers, each one doing a single job.';
 
 export const aiLayers = [
   {
     icon: 'sort',
     title: '1 · Classifier agent',
     text: 'Reads each email and its attachments and returns a structured record: what is being asked, which business line it belongs to and the key details. The output is checked against a schema, so the next steps can trust it.',
+    visual: {
+      type: 'record',
+      alt: 'Illustration: an email goes in and a structured record comes out with action, business line and entities.',
+      source: 'Email',
+      fields: ['action', 'business line', 'entities'],
+    },
   },
   {
     icon: 'tool',
     title: '2 · Enrichment agent with tools',
-    text: 'An agent that can use tools. Through an MCP server it queries the CMDB to find the exact circuit the email is about, instead of guessing from the text.',
+    text: 'An agent that can use tools. Through an MCP server written in Python, it queries the CMDB to find the exact circuit the email is about, instead of guessing from the text.',
+    visual: {
+      type: 'tool',
+      alt: 'Illustration: the agent calls the CMDB through an MCP server and gets the answer back.',
+      steps: ['Agent', 'MCP', 'CMDB'],
+    },
   },
   {
     icon: 'db',
     title: '3 · Knowledge base in Qdrant',
     text: 'The knowledge the agent can search. A Python script splits the documents into chunks, turns them into embeddings and stores them in Qdrant. The agent has the vector store as a tool: it retrieves the most relevant chunks and answers with them as context.',
+    visual: {
+      type: 'index',
+      alt: 'Illustration: documents are split into chunks and stored in Qdrant.',
+      source: 'Documents',
+      mid: 'Chunks',
+      target: 'Qdrant',
+    },
   },
 ];
 
@@ -296,6 +334,57 @@ export const impact = [
     text: 'Every email stored with its classification, CI source, state and real token usage.',
     icon: 'audit',
     metric: null, // TODO: metric (e.g. triage time before vs after / % auto-ticketed)
+  },
+];
+
+// Improvements for next phases (user, 2026-11-11). These are proposals, not built in this
+// project: keep them out of `techStack` and `keyTech`. The diagrams are illustrative
+// (no real timings or schema), so do not add numbers to them.
+export const nextSteps = [
+  {
+    icon: 'trace',
+    tag: 'Observability',
+    title: 'Tracing and evaluation with Langfuse',
+    text: 'Every email becomes one trace: each agent step, tool call and retrieved chunk, with its latency and cost.',
+    why: 'The audit log already records the result and the token usage of each email. Traces add the steps in between, so a wrong classification can be debugged and a prompt change can be evaluated before it reaches production.',
+    visual: {
+      type: 'trace',
+      alt: 'Illustration of one trace: an email run containing the classifier agent with its Qdrant search, then the enrichment agent with its CMDB lookup.',
+      // left and width are percentages of the run; illustrative only
+      spans: [
+        { label: 'Email run', left: 0, width: 100, level: 0 },
+        { label: 'Classifier agent', left: 0, width: 54, level: 1 },
+        { label: 'Qdrant search', left: 10, width: 20, level: 2 },
+        { label: 'Enrichment agent', left: 58, width: 42, level: 1 },
+        { label: 'MCP · CMDB', left: 66, width: 22, level: 2 },
+      ],
+    },
+  },
+  {
+    icon: 'graph',
+    tag: 'Retrieval',
+    title: 'Hybrid retrieval: Qdrant + Graph RAG',
+    text: 'Qdrant stays as the way in: it finds the documents closest in meaning to the email. A knowledge graph then expands from those matches to everything connected to them.',
+    why: 'NOC knowledge is relational: an incident belongs to a circuit, the circuit to a customer, and a runbook solved it. No single chunk holds those links, so similarity alone misses them. Vector search still finds the starting point.',
+    visual: {
+      type: 'graph',
+      alt: 'Illustration of hybrid retrieval: Qdrant matches a new email to a similar past incident, then the graph follows that incident to its runbook, its circuit and the customer on that circuit.',
+      // x, y in a 300×150 viewBox. Edge kind: vector (similarity match) or graph (stored link).
+      nodes: [
+        { id: 'email', label: 'New email', x: 36, y: 58 },
+        { id: 'incident', label: 'Past incident', x: 128, y: 58 },
+        { id: 'runbook', label: 'Runbook', x: 212, y: 24 },
+        { id: 'circuit', label: 'Circuit', x: 204, y: 92 },
+        { id: 'customer', label: 'Customer', x: 268, y: 58 },
+      ],
+      edges: [
+        ['email', 'incident', 'vector'],
+        ['incident', 'runbook', 'graph'],
+        ['incident', 'circuit', 'graph'],
+        ['circuit', 'customer', 'graph'],
+      ],
+      legend: { vector: 'Qdrant · similar', graph: 'Graph · connected' },
+    },
   },
 ];
 
