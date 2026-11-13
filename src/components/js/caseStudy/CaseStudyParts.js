@@ -2,7 +2,7 @@ import React from 'react';
 import { scrollToSection, useInView } from '../hooks';
 
 // 24×24 line icons, drawn with the accent colour.
-const ICONS = {
+export const ICONS = {
   owner: 'M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4',
   client: 'M4 5h16v11H10l-6 4z M8 9h8 M8 12h5',
   deploy: 'M12 20V7 M6 13l6-6 6 6 M5 3h14',
@@ -17,11 +17,17 @@ const ICONS = {
   mail: 'M3 6h18v12H3z M3 7l9 6 9-6',
   inbox: 'M3 13l3-8h12l3 8v6H3z M3 13h5l1 3h6l1-3h5',
   done: 'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0 M8 12l3 3 5-6',
+  search: 'M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13 M15.5 15.5L20 20',
+  doc: 'M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h6',
+  code: 'M8 8l-4 4 4 4 M16 8l4 4-4 4 M13.5 5l-3 14',
+  target: 'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0 M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0 M12 12h.01',
+  users:
+    'M9 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6 M3 19c0-3 2.7-5 6-5s6 2 6 5 M16.5 11a2.5 2.5 0 1 0 0-5 M17 14c2.4.3 4 2 4 4.5',
   graph:
     'M4 6a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M16 8a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M9 18a2 2 0 1 0 4 0a2 2 0 1 0-4 0 M8 6.3l8 1.4 M6.8 7.9l3.4 8.2 M16.8 9.6l-4.6 6.8',
 };
 
-const Icon = ({ name }) => (
+export const Icon = ({ name }) => (
   <svg className="cs-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
     <path d={ICONS[name]} />
   </svg>
@@ -175,12 +181,12 @@ export function Details({ label, children }) {
   );
 }
 
-export function BeforeAfter({ before, after }) {
+export function BeforeAfter({ before, after, labels = ['Before', 'After'] }) {
   const [ref, visible] = useInView();
   return (
     <div ref={ref} className={`cs-ba cs-reveal ${visible ? 'is-visible' : ''}`}>
       <div className="cs-ba-col is-before">
-        <h3>Before</h3>
+        <h3>{labels[0]}</h3>
         <ul>
           {before.map((b) => (
             <li key={b}>{b}</li>
@@ -189,7 +195,7 @@ export function BeforeAfter({ before, after }) {
       </div>
       <span className="cs-ba-arrow" aria-hidden="true" />
       <div className="cs-ba-col is-after">
-        <h3>After</h3>
+        <h3>{labels[1]}</h3>
         <ul>
           {after.map((a) => (
             <li key={a}>{a}</li>
@@ -217,7 +223,10 @@ export function Timeline({ steps }) {
   );
 }
 
-export function RagFlow({ groups }) {
+const RAG_CAPTION =
+  'Documents are indexed once and updated when they change. At run time the agent searches them by meaning and answers from what it finds.';
+
+export function RagFlow({ groups, caption = RAG_CAPTION }) {
   const [ref, visible] = useInView();
   return (
     <figure ref={ref} className={`cs-rag cs-reveal ${visible ? 'is-visible' : ''}`} aria-labelledby="rag-caption">
@@ -228,7 +237,7 @@ export function RagFlow({ groups }) {
             {g.steps.map((s, i) => (
               <li
                 key={s.label}
-                className={`cs-rag-step ${s.label.startsWith('Qdrant') ? 'is-qdrant' : ''}`}
+                className={`cs-rag-step ${s.highlight || s.label.startsWith('Qdrant') ? 'is-qdrant' : ''}`}
                 style={{ '--i': gi * g.steps.length + i }}
               >
                 <em aria-hidden="true">{i + 1}</em>
@@ -240,8 +249,7 @@ export function RagFlow({ groups }) {
         </div>
       ))}
       <figcaption id="rag-caption" className="cs-caption">
-        Documents are indexed once and updated when they change. At run time the agent searches them by meaning and
-        answers from what it finds.
+        {caption}
       </figcaption>
     </figure>
   );

@@ -1,0 +1,185 @@
+[
+  {
+    "slug": "ci-cd-for-ai-systems",
+    "title": "CI/CD, and what changes when the system uses AI",
+    "description": "Continuous integration and delivery in plain words: what each means, the pipeline stage by stage, Jenkins and its alternatives, and the evaluation stage an AI system needs before it is deployed.",
+    "date": "2027-01-05",
+    "tags": [
+      "CI/CD",
+      "Applied AI",
+      "Evaluation",
+      "Developer tools"
+    ],
+    "cover": "pipeline"
+  },
+  {
+    "slug": "tdd-bdd-and-sdd",
+    "title": "TDD, BDD and SDD: write what “correct” means first",
+    "description": "Test-Driven, Behaviour-Driven and Spec-Driven Development explained one by one: what each writes first, how TDD and BDD compare, and why SDD has grown with AI coding agents.",
+    "date": "2027-01-02",
+    "tags": [
+      "Testing",
+      "AI agents",
+      "Applied AI",
+      "Developer tools"
+    ],
+    "cover": "spec"
+  },
+  {
+    "slug": "architecture-patterns-and-microservices",
+    "title": "Architecture patterns, and where microservices fit",
+    "description": "The main software architecture patterns in one picture, then a close look at microservices: what they cost, what Docker, Kubernetes and OpenShift each add, and the patterns that keep them working.",
+    "date": "2026-12-29",
+    "tags": [
+      "Microservices",
+      "Architecture",
+      "Kubernetes",
+      "Docker"
+    ],
+    "cover": "services"
+  },
+  {
+    "slug": "trusting-ai-in-production",
+    "title": "Hallucinations, tracing and evaluation: trusting an AI system in production",
+    "description": "Why AI systems give confident wrong answers, what that looks like in a real system, and how design, tracing with Langfuse and evaluation make them rare and visible.",
+    "date": "2026-12-26",
+    "tags": [
+      "AI agents",
+      "Applied AI",
+      "Evaluation",
+      "RAG"
+    ],
+    "cover": "trace"
+  },
+  {
+    "slug": "workflow-or-agent",
+    "title": "Workflow or agent? How much autonomy to give an AI system",
+    "description": "A workflow follows the steps you wrote; an agent chooses its own. What each is good at, the levels in between, and how to decide where the model belongs.",
+    "date": "2026-12-22",
+    "tags": [
+      "AI agents",
+      "Automation",
+      "Applied AI",
+      "n8n"
+    ],
+    "cover": "fork"
+  },
+  {
+    "slug": "agentic-patterns",
+    "title": "Four agentic patterns you should know",
+    "description": "Reflection, tool use, planning and multi-agent: what each pattern is, when it earns its cost, and where each one goes wrong. With a diagram for every one.",
+    "date": "2026-12-08",
+    "tags": [
+      "AI agents",
+      "Agentic patterns",
+      "Applied AI"
+    ],
+    "cover": "agents"
+  },
+  {
+    "slug": "sandersons-laws-for-ai-agents",
+    "title": "Sanderson’s laws of magic, applied to AI agents",
+    "description": "A fantasy author’s three rules for designing magic systems, read as a design review for AI agents: understood before it is trusted, limits over powers, and depth before more tools.",
+    "date": "2026-12-01",
+    "tags": [
+      "AI agents",
+      "Applied AI",
+      "Agentic patterns",
+      "Books"
+    ],
+    "cover": "laws"
+  },
+  {
+    "slug": "mcp-in-plain-words",
+    "title": "MCP in plain words: how AI agents reach your systems",
+    "description": "What the Model Context Protocol is, the problem it removes, what a server looks like in Python, and how to design tools a model can use safely.",
+    "date": "2026-11-27",
+    "tags": [
+      "MCP",
+      "AI agents",
+      "Applied AI",
+      "Python"
+    ],
+    "cover": "mcp"
+  },
+  {
+    "slug": "how-i-work-with-ai",
+    "title": "How I work with AI: a system, not autopilot",
+    "description": "Understand it first, write the rules down, delegate small, review every line, verify the result. How I use Claude Code, Orca and MCP without handing over the decisions.",
+    "date": "2026-11-24",
+    "tags": [
+      "AI agents",
+      "Applied AI",
+      "Claude Code",
+      "Developer tools"
+    ],
+    "cover": "review"
+  },
+  {
+    "slug": "pick-and-roll-of-ai-agents",
+    "title": "The pick and roll of AI agents",
+    "description": "Two players, two roles, one read. How the most common play in basketball explains an orchestrator and a specialist agent working together, and the turnovers that break both.",
+    "date": "2026-11-20",
+    "tags": [
+      "AI agents",
+      "Agentic patterns",
+      "Applied AI",
+      "Basketball"
+    ],
+    "cover": "court"
+  },
+  {
+    "slug": "what-is-a-forward-deployed-engineer",
+    "title": "What is a Forward Deployed Engineer?",
+    "description": "The role in plain words: an engineer who builds inside the customer's problem. What they do, how it differs from the roles next to it, and why AI made it grow.",
+    "date": "2026-11-17",
+    "tags": [
+      "Forward Deployed Engineer",
+      "Applied AI",
+      "Careers"
+    ],
+    "cover": "bridge"
+  },
+  {
+    "slug": "what-matters-in-ai-engineering",
+    "title": "What really matters in AI engineering today",
+    "description": "A new AI announcement every day, and much of it fades within weeks. The parts that last: the harness, skills, MCP, RAG, LangGraph and Langfuse, and the trends I approach with caution.",
+    "date": "2026-11-14",
+    "tags": [
+      "AI agents",
+      "Applied AI",
+      "MCP",
+      "RAG"
+    ],
+    "cover": "signal"
+  },
+  {
+    "slug": "rag-in-production",
+    "title": "How to build a RAG system that survives production",
+    "description": "Retrieval-augmented generation in plain words and pictures: the two pipelines, chunking, search by meaning, and what separates a demo from a system your company can rely on.",
+    "date": "2026-11-13",
+    "tags": [
+      "RAG",
+      "AI agents",
+      "Applied AI",
+      "Python"
+    ],
+    "cover": "vectors"
+  },
+  {
+    "url": "https://chakray.com/n8n-automation-build-workflow/",
+    "urlEs": "https://chakray.com/es/automatizacion-con-n8n-workflow/",
+    "source": "Chakray blog",
+    "title": "n8n automation: how to build a workflow step by step",
+    "description": "What n8n is, how a workflow runs from trigger to action, and a worked example with Docker Compose, MySQL and a REST API. Ends with what to check before a workflow goes to production.",
+    "date": "2023-02-28",
+    "tags": [
+      "n8n",
+      "Automation",
+      "Docker",
+      "MySQL"
+    ],
+    "cover": "workflow",
+    "pinned": true
+  }
+]

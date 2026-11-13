@@ -6,6 +6,7 @@ import Education from '../components/js/Education';
 import Experience from '../components/js/Experience';
 import Skills from '../components/js/Skills';
 import ProjectsSection from '../components/js/caseStudy/ProjectsSection';
+import BlogSection from '../components/js/blog/BlogSection';
 import { NOC_PATH } from './NocProjectPage';
 
 // Old deep link to the case study, from when it lived on this page.
@@ -43,6 +44,9 @@ function HomePage() {
       </Section>
       <Section name="projects">
         <ProjectsSection />
+      </Section>
+      <Section name="blog">
+        <BlogSection />
       </Section>
       <Section name="skills">
         <Skills />

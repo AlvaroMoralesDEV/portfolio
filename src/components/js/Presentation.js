@@ -3,6 +3,7 @@ import profileImage from '../../assets/images/profile.jpg';
 import linkedinIcon from '../../assets/icons/linkedin.png';
 import githubIcon from '../../assets/icons/github.png';
 import gmailIcon from '../../assets/icons/gmail.png';
+import { Link } from 'react-router-dom';
 import { scrollToSection, useReducedMotion } from './hooks';
 
 const FOCUS_AREAS = [
@@ -92,6 +93,9 @@ function Presentation() {
             <a href="#projects" className="pf-btn" onClick={(e) => go(e, 'projects')}>
               See my projects
             </a>
+            <Link to="/blog" className="pf-btn is-ghost">
+              Read the blog
+            </Link>
             <a href="#contact" className="pf-btn is-ghost" onClick={(e) => go(e, 'contact')}>
               Get in touch
             </a>
