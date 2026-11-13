@@ -7,6 +7,7 @@ export const NAV_SECTIONS = [
   { id: 'presentation', label: 'Home' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
+  { id: 'blog', label: 'Blog' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
@@ -20,10 +21,13 @@ function Navbar() {
   const toggleRef = useRef(null);
   const firstLinkRef = useRef(null);
   const navigate = useNavigate();
-  const onHome = useLocation().pathname === '/';
-  // Section tracking only makes sense on the home page; project pages sit under "Projects".
+  const { pathname } = useLocation();
+  const onHome = pathname === '/';
+  // Section tracking only makes sense on the home page; the other pages sit under
+  // "Blog" or "Projects".
   const tracked = useActiveSection(onHome ? SECTION_IDS : NO_IDS);
-  const active = onHome ? tracked : 'projects';
+  const offHome = pathname.startsWith('/blog') ? 'blog' : 'projects';
+  const active = onHome ? tracked : offHome;
   const hrefFor = (id) => (onHome ? `#${id}` : `/#${id}`);
 
   // Close the drawer on Escape and return focus to the toggle.
